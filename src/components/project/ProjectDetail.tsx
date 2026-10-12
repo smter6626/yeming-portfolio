@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { ProjectDetailProps } from "../../lib/types";
+import type { ProjectDetailProps, ProjectId } from "../../lib/types";
 import { categoryLabel, evidenceKindLabel, localePath } from "../../lib/i18n";
 import styles from "./ProjectDetail.module.css";
 import ProjectNarrative from "./ProjectNarrative";
@@ -11,7 +11,6 @@ const labels = {
     approach: "Question & approach", contributions: "Contributions", architecture: "Architecture",
     evidence: "Results & resources", question: "The question", method: "The approach",
     myContributions: "My contributions", tools: "Tools & methods", fits: "How the work fits together",
-    inspect: "Publications, code & project records",
     source: "View source", limits: "Project notes", related: "Continue exploring",
     relatedNav: "Related projects",
   },
@@ -20,9 +19,17 @@ const labels = {
     resources: "相关资源", newTab: " (在新标签页打开)", pageNav: "项目页目录",
     approach: "问题与方法", contributions: "项目贡献", architecture: "架构", evidence: "成果与资源",
     question: "要解决的问题", method: "采用的方法", myContributions: "我的贡献", tools: "工具与方法",
-    fits: "各部分如何协同", inspect: "论文、源码与项目记录",
+    fits: "各部分如何协同",
     source: "查看来源", limits: "项目说明", related: "继续探索", relatedNav: "相关项目",
   },
+};
+
+const resourceTitles: Record<ProjectId, { en: string; zh: string }> = {
+  research: { en: "Paper & research materials", zh: "论文与研究资料" },
+  governance: { en: "Method & documented cases", zh: "方法文档与案例" },
+  "1pcloop": { en: "Implementation & run records", zh: "实现与运行案例" },
+  transcriber: { en: "Source & downloads", zh: "源码与下载" },
+  audioshifter: { en: "Source, downloads & release checks", zh: "源码、下载与发布检查" },
 };
 
 function OutboundMark() {
@@ -35,6 +42,9 @@ function OutboundMark() {
 
 export default function ProjectDetail({ project, allProjects, locale }: ProjectDetailProps) {
   const text = labels[locale];
+  const desktop = project.category === "Desktop software";
+  const architectureNav = desktop ? (locale === "zh" ? "使用中的行为" : "In use") : text.architecture;
+  const architectureHeading = desktop ? (locale === "zh" ? "应用如何处理实际使用中的问题" : "How the app behaves in use") : text.fits;
   const recordCount = locale === "zh" ? `${project.evidence.length} 项资源` : `${project.evidence.length} ${project.evidence.length === 1 ? "resource" : "resources"}`;
   const noteCount = locale === "zh" ? `${project.limitations.length} 条说明` : `${project.limitations.length} ${project.limitations.length === 1 ? "note" : "notes"}`;
   const relatedProjects = project.related.flatMap((id) => {
@@ -87,7 +97,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
           <a key={section.id} href={`#${section.id}`}>{section.navLabel}</a>
         )) : <><a href="#approach">{text.approach}</a>
         <a href="#contributions">{text.contributions}</a>
-        <a href="#architecture">{text.architecture}</a></>}
+        <a href="#architecture">{architectureNav}</a></>}
         <a href="#evidence">{text.evidence}</a>
       </nav>
 
@@ -140,7 +150,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
       <section className={styles.section} id="architecture" aria-labelledby="architecture-heading">
         <div className={styles.sectionLead}>
           <span className={styles.sectionNumber}>03</span>
-          <h2 id="architecture-heading">{text.fits}</h2>
+          <h2 id="architecture-heading">{architectureHeading}</h2>
         </div>
         <ol className={styles.architecture}>
           {project.architecture.map((step, index) => (
@@ -171,7 +181,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
         )}
         <div className={styles.disclosures}>
           {project.evidence.length > 0 && <details>
-            <summary><span>{text.inspect}</span><span className={styles.detailCount}>{recordCount}</span></summary>
+            <summary><span>{resourceTitles[project.id][locale]}</span><span className={styles.detailCount}>{recordCount}</span></summary>
             <div className={styles.disclosureBody}>
               <ul className={styles.evidenceList}>
                 {project.evidence.map((item) => (

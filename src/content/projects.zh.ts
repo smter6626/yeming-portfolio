@@ -10,29 +10,65 @@ export const projectsZh: Project[] = [
     title: "概率电路与最优传输",
     shortTitle: "稳健机器学习",
     subtitle: "概率模型稳健性与可复现的 GPU 实验",
-    summary: "我参与研究概率模型在数据分布变化下的稳健性，重点负责可复现的 GPU 实验、结果验证，以及供论文使用的研究材料。",
+    summary: "我研究概率机器学习中的稳健性，参与方法研究，并负责实验执行、失败分析和可复现的 GPU 工作流。",
     role: "本科研究人员、PeTeR 共同作者",
     timeframe: "2026 年 3 月至今",
     status: "研究进行中",
     tags: ["概率电路", "最优传输", "PyTorch", "CUDA", "Slurm"],
-    question: "数据分布发生变化时，概率模型怎样保持稳健？怎样通过可复现的实验研究这些问题？",
-    approach: "研究探索结构化最优传输目标，以及训练后提升模型稳健性的方法。我负责执行实验、恢复 GPU 环境、验证结果、诊断失败原因和整理发表材料。",
+    question: "已经训练的概率电路遇到数据分布变化时，能否在不使用原始训练数据、不从头训练的情况下提高稳健性？",
+    approach: "PeTeR 通过训练后稳健化研究这个问题。作为共同作者，我参与实验执行、结果验证、工程支持和补充实验材料准备。在后续工作中，我执行超参数扫描与 GPU 学习实验，核对结果覆盖，并保留失败记录用于数值稳定性分析。",
     highlights: [
-      { title: "共同发表研究成果", body: "我共同署名的 PeTeR 论文研究概率电路的训练后稳健化，已被 UAI 2026 可处理概率建模研讨会接收。我的工作包括实验执行、结果验证、工程支持和论文所需材料。" },
-      { title: "可复现的 GPU 研究环境", body: "我在亚利桑那州立大学的 GPU 集群上恢复了 Python 3.11、PyTorch/CUDA、Triton 和 PyJuice 研究环境，解决了因缺少 Python 开发头文件而阻塞的本地编译问题。" },
-      { title: "诊断实验失败原因", body: "我检查结果覆盖情况，并保留失败运行的诊断材料，包括数值不稳定、无效概率、调度配置不匹配，以及特定数据集上的失败。" },
-      { title: "依据实测安排资源", body: "我根据内存与运行时间观测调整 GPU 并发执行，并在可复用的基准工作流中验证导出与重新加载、校验和、采样及可视化。" },
+      {
+        "title": "PeTeR 与可检查的实验材料",
+        "body": "我共同署名的 PeTeR 论文已被 UAI 2026 可处理概率建模研讨会接收。我也准备了配有简短说明、基准数据和 CSV 表格输出的补充实验入口，使实验流程更容易检查。"
+      },
+      {
+        "title": "保留失败结果的超参数扫描",
+        "body": "我在 K=1、3、5 下各执行并审计 1,120 个配置，共 3,360 个。部分高学习率配置产生无效概率；我保留错误记录并与 Adrian Ciotinga 确认处理方式，将这些预期的数值失败与其他结果一同交付。"
+      },
+      {
+        "title": "依据工作负载选择 GPU 配置",
+        "body": "在另一项覆盖 28 个数据集的学习实验中，我通过预热与显存观测安排并发。K=3 在 L40S 上八路并发，显存需求更高的 K=5 使用 A100 80GB。每批交付前，我核对调度状态、错误输出、结果文件和仓库变更。"
+      },
+      {
+        "title": "作业完成后，仍检查实际结果",
+        "body": "监控实验时，我发现部分数据集图像混乱、数据异常，随后向 Adrian 汇报。除了核对输出文件覆盖，我也检查可视化并保留诊断日志，使已经完成的作业仍能接受结果检查。"
+      }
     ],
     architecture: [
-      { label: "研究目标", description: "概率电路、数据分布变化和结构化最优传输。" },
-      { label: "复现环境", description: "隔离依赖，配置 CUDA 工具、本地编译和 GPU Slurm 作业。" },
-      { label: "执行实验", description: "配置组合、经过测量的并发设置、运行状态观测，以及保留的失败日志。" },
-      { label: "检查研究产物", description: "结果覆盖检查、序列化与重新加载、失败分类和分批交付。" },
+      {
+        "label": "研究稳健性",
+        "description": "PeTeR 探索无需原始训练数据的训练后稳健化；后续工作包含超参数扫描与独立的概率电路学习实验。"
+      },
+      {
+        "label": "测量后安排资源",
+        "description": "恢复 GPU 环境，进行预热运行，用显存观测决定硬件与并发设置。"
+      },
+      {
+        "label": "核对覆盖与失败",
+        "description": "检查作业和错误状态、预期结果文件及失败配置，保留用于数值稳定性讨论的错误记录。"
+      },
+      {
+        "label": "交付可检查的实验",
+        "description": "按验收后的批次提交结果，准备带有说明与 CSV 输出的可读补充实验入口。"
+      }
     ],
     metrics: [
-      { ...research.metrics[0], label: "实验配置组合", scope: "完整篇幅后续研究中的配置组合。" },
-      { ...research.metrics[1], label: "基准数据集", scope: "后续研究覆盖 28 个数据集，均产出完整的 JSON 结果。" },
-      { ...research.metrics[2], label: "L40S 并发运行数", scope: "对应研究工作负载的并发执行，峰值内存约为 12 GiB。" },
+      {
+        "value": "3,360",
+        "label": "已审计的扫描配置",
+        "scope": "K=1、3、5 各 1,120 个配置，包含已记录的数值失败。"
+      },
+      {
+        "value": "28",
+        "label": "学习实验的数据集",
+        "scope": "另一项学习实验在 K=1、3、5 下的预期结果文件均存在且非空。"
+      },
+      {
+        "value": "8",
+        "label": "GPU 并发任务",
+        "scope": "K=3 使用 L40S，显存需求更高的 K=5 使用 A100 80GB。"
+      }
     ],
     evidence: [
       { ...research.evidence[0], title: "PeTeR 论文", description: "PeTeR: Post-Training Robustification of Probabilistic Circuits，作者为 Adrian Ciotinga、Yeming Dai 和 YooJung Choi。", scope: "UAI 2026 可处理概率建模研讨会；arXiv:2607.07671。" },
@@ -42,23 +78,23 @@ export const projectsZh: Project[] = [
   },
   {
     ...governance,
-    title: "长期 AI 任务的规则与进度管理",
-    shortTitle: "AI 任务管理方法",
+    title: "长期 AI 工作的独立审查与验收",
+    shortTitle: "AI 审查方法",
     subtitle: "独立审查、证据与可追溯的验收决定",
     summary: "我设计了一套让 AI 工作可检查、可追溯的方法：分离生成与验收，独立审查实际产物，并保存当前结论所依据的证据。",
     role: "方法作者",
     timeframe: "v1.2 于 2026 年 8 月发布",
     status: "已发布中英文方法文档",
     tags: ["项目规则", "进度管理", "独立审查", "Git"],
-    question: "当 AI 生成内容的速度超过人工验证的能力时，怎样让验收建立在充分证据之上，并避免错误被后续任务不断继承？",
+    question: "怎样独立检查智能体的自检，并防止已被推翻的验收结论继续指导后续工作？",
     approach: "我分离生成与验收职责，将任务约束、已验收状态和决策历史保存在仓库中。独立审查者直接检查实际产物，形成自己的结论，并判断执行者选择的验证方式是否足够。审查强度与任务风险匹配；涉及真实意图、敏感事实或不可逆操作的判断交由人处理。新证据推翻旧验收时，明确记录结论失效，使后续会话依据当前有效的结论继续工作。",
     narrative: [
       {
         "id": "approach",
-        "title": "生成越来越快，如何判断结果值得信任？",
+        "title": "自检通过后，产物仍然可能有缺陷。",
         "navLabel": "信任问题",
         "paragraphs": [
-          "当 AI 生成内容的速度超过人工逐项验证的能力时，怎样判断哪些结果可以接受？我围绕这个问题设计方法，将重点放在每次验收所依据的证据与决定权限上。"
+          "AI 可以产生大量难以逐项人工检查的内容。我从一个具体的验收问题出发：执行者的自检通过了，独立检查却发现同一产物仍有缺陷；一旦“已通过”被记入项目状态，后续会话又可能把它当成事实继续使用。"
         ],
         "points": [
           {
@@ -103,7 +139,7 @@ export const projectsZh: Project[] = [
         "points": [
           {
             "title": "自检通过的 PDF，被独立检查发现缺陷",
-            "body": "PDF 的视觉布局正确，执行者选用的文本提取检查也通过了；另一条提取路径却发现正文段落出现在签名之后。独立审查推翻旧验收，修复渲染器后，再通过多种提取方式检查替代产物。"
+            "body": "PDF 的视觉布局正确，执行者选用的文本提取检查也通过了；另一条提取路径却发现正文段落出现在签名之后。独立审查推翻旧验收，修复渲染器后，再通过多种提取方式检查替代产物。 这次事件改变了我对独立审查的定义：审查者必须能判断验证是否充分，并能选择另一条证据检查路径。"
           },
           {
             "title": "把音频应用的发布与实际应用包对应起来",
@@ -129,12 +165,46 @@ export const projectsZh: Project[] = [
       { ...governance.metrics[1], label: "已记录案例", scope: "求职准备和 AudioShifter 发布工程。" },
     ],
     evidence: [
-      { ...governance.evidence[0], title: "中英文文档与引用信息", description: "v1.2 包含中英文原稿、PDF、可供程序读取的引用信息和发布校验和。", scope: "版本 DOI 为 10.5281/zenodo.21911982，发布于 2026 年 8 月 13 日。" },
-      { ...governance.evidence[1], title: "独立审查推翻自检结论", description: "PDF 案例中，独立文本提取检查发现了自检遗漏的阅读顺序问题。修复渲染器后，通过多种文本提取方式完成复查。", scope: "v1.2 文档中的 PDF 制作案例。" },
-      { ...governance.evidence[2], title: "软件发布的证据链", description: "AudioShifter 案例连接了测试、应用包审计、带版本标签的源码、校验和、非开发机验收，以及重新下载的发布文件。", scope: "AudioShifter alpha.3 发布工程。" },
+      {
+        "title": "方法正文与引用",
+        "description": "v1.2 包含中英文原稿、PDF、可供程序读取的引用信息和发布校验和。",
+        "kind": "publication",
+        "scope": "版本 DOI 为 10.5281/zenodo.21911982，发布于 2026 年 8 月 13 日。",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-zh.md"
+      },
+      {
+        "title": "独立审查推翻自检结论",
+        "description": "PDF 案例中，独立文本提取检查发现了自检遗漏的阅读顺序问题。修复渲染器后，通过多种文本提取方式完成复查。",
+        "kind": "case-study",
+        "scope": "v1.2 文档中的 PDF 制作案例。",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-zh.md"
+      },
+      {
+        "title": "软件发布的证据链",
+        "description": "AudioShifter 案例连接了测试、应用包审计、带版本标签的源码、校验和、非开发机验收，以及重新下载的发布文件。",
+        "kind": "case-study",
+        "scope": "AudioShifter alpha.3 发布工程。",
+        "href": "https://github.com/smter6626/AudioShifter/blob/main/macos/release/release_verification_v0.1.0-alpha.3.md"
+      }
     ],
     limitations: [],
-    links: governance.links.map((link, index) => ({ ...link, label: ["查看方法仓库", "阅读 v1.2 文档"][index] })),
+    links: [
+      {
+        "label": "阅读方法正文",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-zh.md",
+        "kind": "publication"
+      },
+      {
+        "label": "查看方法仓库",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework",
+        "kind": "source"
+      },
+      {
+        "label": "版本 DOI",
+        "href": "https://doi.org/10.5281/zenodo.21911982",
+        "kind": "publication"
+      }
+    ],
   },
   {
     ...coding,
@@ -151,11 +221,11 @@ export const projectsZh: Project[] = [
     narrative: [
       {
         "id": "approach",
-        "title": "当 AI 生成速度超过人工验证能力。",
+        "title": "把验收方法落实为可运行的系统。",
         "navLabel": "信任问题",
         "paragraphs": [
-          "当 AI 生成代码和产物的速度超过人工逐项验证的能力时，怎样判断哪些结果可以接受，并避免未经充分验证的结论被后续步骤当成事实？",
-          "我实现这套流程，将框架中的独立审查与验收方法变成可执行的编程过程，为实现、审查和人工判断分别设定职责。"
+          "当 AI 生成代码的速度超过人工逐项检查的能力时，我希望知道：哪个版本经过了审查，什么证据支持验收，以及何时需要人介入。我实现这套编程流程，将这些判断落实到执行过程。",
+          "系统分别处理验收判断和版本对应关系。审查者依据验收标准检查代码、测试和产物；Python 程序核对结论格式、提交关系和证据身份，使记录的决定对应到经过审查的具体版本。"
         ]
       },
       {
@@ -163,7 +233,7 @@ export const projectsZh: Project[] = [
         "title": "将生成与验收分开。",
         "navLabel": "审查流程",
         "paragraphs": [
-          "任务约束和验收标准贯穿整个循环。编程智能体产生结果，独立审查智能体直接检查实际产物，判断证据是否足以支持验收。"
+          "程序将限定范围的任务交给编程与独立审查两个角色。审查结果可以接受产物、要求修复，或暂停等待人工决定。"
         ],
         "steps": [
           {
@@ -186,37 +256,76 @@ export const projectsZh: Project[] = [
       },
       {
         "id": "architecture",
-        "title": "让已验收状态跨会话保留。",
-        "navLabel": "状态与恢复",
+        "title": "为什么两个角色采用不同的会话生命周期。",
+        "navLabel": "设计选择",
         "paragraphs": [
-          "我将任务约束和当前进度保存在仓库记录中，以检查点保存执行与恢复状态。新的会话可以结合这些记录与实际项目，重建当前任务。"
+          "审查会话持续保留任务的判断背景，每轮编程则从当前有界指令开始。这样，下一轮实现可以交给新的会话，而不需要继承审查者的完整对话。"
         ],
         "points": [
           {
-            "title": "将结论绑定到经过审查的具体产物",
-            "body": "状态更新前，我核对分支、提交关系、允许修改的路径、项目规则哈希和证据 SHA-256，将验收结论与实际版本对应起来。"
+            "title": "保留上下文，也要检查它是否过时",
+            "body": "持续会话可能保留旧假设。我从项目规则、当前状态、Git 与产物重建审查所需的权威输入：进度变化时刷新当前记录，长期要求变化时重建审查会话。会话提供工作背景，仓库记录决定当前任务。"
           },
           {
-            "title": "在恢复过程中明确处理不确定性",
-            "body": "检查点保留智能体轮次身份、审查上下文和状态变更。恢复时核对中断前后的工作，避免重复已完成的轮次；无法解释的状态变化交由人工检查。"
+            "title": "验收结论需要对应具体版本",
+            "body": "分支、提交关系、路径和 SHA-256 检查将结论绑定到经过审查的文件，语义上的验收仍由审查者判断。保留审查会话的同时，也需要维护这套身份检查与刷新规则。"
+          },
+          {
+            "title": "恢复之前，先核对什么已经完成",
+            "body": "检查点保存已完成轮次和状态变更，恢复时核对中断前后的操作，无法解释的变化交由人检查。编程已经完成时，记录发布可以单独恢复。"
           }
         ]
       },
       {
         "id": "practice",
-        "title": "在真实项目中运行审查循环。",
+        "title": "课堂转写器任务中实际发生了什么。",
         "navLabel": "实际运行",
         "paragraphs": [
-          "多语言课堂转写任务经过了 3 轮审查循环、7 次智能体会话轮次和 2 次项目提交。独立审查与人工检查覆盖了日语、法语的实时转写。",
-          "我还开发了只读终端界面，分别显示任务结论、进度更新和支持材料发布状态，让当前结果与等待人工处理的决定清晰可见。"
+          "我在自己开发的课堂转写器仓库中运行这套流程，扩展原始音频的语言选择。成功运行之前，首次尝试已经产生代码和测试，却因工具运行权限无法创建所要求的 Git 提交。"
+        ],
+        "points": [
+          {
+            "title": "完成报告与仓库状态不一致，流程停止",
+            "body": "提交失败后，HEAD 未变化，工作区仍有修改。程序检查因此停止流程。我保留恢复证据、恢复基线，修正执行配置并重新验证后，才再次运行。"
+          },
+          {
+            "title": "审查决定增加一项文档工作",
+            "body": "成功运行的第一轮中，审查者接受实现，并要求补充使用文档，说明转写语言与界面语言的区别、英语专用模型的限制。第二轮完成文档，第三轮确认无需继续修改。"
+          },
+          {
+            "title": "最后检查真实音频转写",
+            "body": "随后我用日语和法语实时音频成功完成转写，进行功能验收。整次运行包含 3 轮循环、7 次智能体调用和 2 次提交；审查结论决定何时完成实现、交给人检查。"
+          }
         ]
+      },
+      {
+        "id": "observability",
+        "title": "任务验收与记录完成分别显示。",
+        "navLabel": "运行观察",
+        "paragraphs": [
+          "终端界面分别显示任务是否通过验收、当前进度记录是否更新，以及证据摘要是否完成提交和推送。任务已经通过时，记录仍可能需要保存或发布。",
+          "每轮摘要在流程仓库中保存对应版本、产物位置、哈希与检查结果。发布失败后，可以只恢复记录发布，避免重新执行已经完成的编程工作。"
+        ],
+        "points": []
       }
     ],
     highlights: [
-      { title: "分离生成与验收职责", body: "我让新的编程会话负责实现和测试，让持续保留上下文的审查会话依据验收标准直接检查产物，并可要求补充验证。" },
-      { title: "将验收绑定到实际产物", body: "我验证数据结构、分支与提交关系、项目规则哈希、允许修改的文件范围及证据 SHA-256；只有满足检查且明确启用时，才允许更新当前进度。" },
-      { title: "恢复中断，避免盲目重做", body: "我加入原子保存的检查点、中断进度核对，以及同一审查会话最多两次的结论修正，不要求已完成工作的编程智能体重新执行。" },
-      { title: "清晰呈现任务状态", body: "我实现结构化进度日志、操作命令和只读终端界面，分别显示任务结论、进度更新与支持材料的发布状态。" },
+      {
+        "title": "分离生成与验收职责",
+        "body": "我让新的编程会话负责实现和测试，让持续保留上下文的审查会话依据验收标准直接检查产物，并可要求补充验证。"
+      },
+      {
+        "title": "将验收绑定到实际产物",
+        "body": "我验证数据结构、分支与提交关系、项目规则哈希、允许修改的文件范围及证据 SHA-256；只有满足检查且明确启用时，才允许更新当前进度。"
+      },
+      {
+        "title": "恢复中断，避免盲目重做",
+        "body": "我加入原子保存的检查点、中断进度核对，以及同一审查会话最多两次的结论修正，不要求已完成工作的编程智能体重新执行。"
+      },
+      {
+        "title": "清晰呈现任务状态",
+        "body": "我开发终端界面，将任务验收、进度更新与证据提交和推送分别显示，并支持在编程结束后单独恢复记录发布。"
+      }
     ],
     architecture: [
       { label: "加载规则与进度", description: "读取方法和任务的项目规则、当前状态、目标身份及信息新旧程度。" },
@@ -225,13 +334,41 @@ export const projectsZh: Project[] = [
       { label: "审查并记录验收", description: "依据验收标准判断证据，核对产物身份后记录获授权的结果、要求修复，或暂停等待人工判断。" },
     ],
     metrics: [
-      { ...coding.metrics[0], value: "3 轮", label: "真实外部项目任务", scope: "多语言课堂转写任务，共 7 次智能体会话轮次和 2 次项目提交。" },
-      { ...coding.metrics[1], value: "3 类", label: "分别报告的结果", scope: "分别报告任务结论、进度更新和支持材料的发布状态。" },
+      {
+        "value": "3 轮",
+        "label": "课堂转写器开发任务",
+        "scope": "实现、文档补充与最终确认，共 7 次智能体调用、2 次提交。"
+      }
     ],
     evidence: [
-      { ...coding.evidence[0], title: "可执行的流程实现", description: "仓库包含任务调度、项目规则、运行时结构验证、检查点恢复、操作命令和只读终端界面。", scope: "本地 macOS 实现，使用两个隔离的 Codex 角色运行环境，同时只允许一个工作循环和一个目标仓库写入者。" },
-      { ...coding.evidence[1], title: "外部仓库中的实际任务", description: "一次真实的课堂转写修改经过多轮执行、独立审查和人工确认。日语与法语的实时转写经过人工检查；其余路径依赖测试和实现证据。", scope: "多语言课堂转写任务。" },
-      { ...coding.evidence[2], title: "真实智能体集成测试", description: "测试记录覆盖独立审查给出指令、编程智能体执行和再次审查的完整流程，以及一次进度更新、支持材料发布和终端界面检查。", scope: "真实智能体集成测试，2026 年 9 月 18 日。" },
+      {
+        "title": "可执行的流程实现",
+        "description": "仓库包含任务调度、项目规则、运行时结构验证、检查点恢复、操作命令和只读终端界面。",
+        "kind": "implementation",
+        "scope": "本地 macOS 实现，使用两个隔离的 Codex 角色运行环境，同时只允许一个工作循环和一个目标仓库写入者。",
+        "href": "https://github.com/smter6626/framework-loop/tree/main/1PCloop"
+      },
+      {
+        "title": "外部仓库中的实际任务",
+        "description": "任务增加原始音频语言选项与模型限制。审查提出文档补充任务，随后以日语、法语实时音频转写进行人工验收。",
+        "kind": "validation",
+        "scope": "多语言课堂转写任务。",
+        "href": "https://github.com/smter6626/framework-loop/blob/main/1PCloop/docs/p51_medium_scale_stage_summary.md"
+      },
+      {
+        "title": "真实智能体集成测试",
+        "description": "测试记录覆盖独立审查给出指令、编程智能体执行和再次审查的完整流程，以及一次进度更新、支持材料发布和终端界面检查。",
+        "kind": "validation",
+        "scope": "真实智能体集成测试，2026 年 9 月 18 日。",
+        "href": "https://github.com/smter6626/framework-loop/blob/main/1PCloop/evidence-summaries/f7-post-foundation-real-service-smoke-20260918.md"
+      },
+      {
+        "title": "每轮执行与审查摘要",
+        "description": "公开记录将执行与审查结论关联到具体版本、产物位置和检查结果。",
+        "kind": "implementation",
+        "scope": "保存在流程仓库中的整理记录。",
+        "href": "https://github.com/smter6626/framework-loop/tree/main/1PCloop/evidence-summaries"
+      }
     ],
     limitations: [
       "在 macOS 上本地运行，同一时刻由一个编程智能体修改项目，集成和发布由人工确认。",
@@ -249,22 +386,49 @@ export const projectsZh: Project[] = [
     status: "已公开发布 1.1.0",
     tags: ["Python", "PySide6", "whisper.cpp", "Metal", "流式音频", "PyInstaller"],
     question: "学生怎样使用设备本地转写跟上课堂讲授，而不依赖云端转写服务或事先配置的开发环境？",
-    approach: "我将界面、麦克风采集、缓冲与重采样、转写引擎、本地推理后端及持久化分开实现。重叠音频片段通过 whisper.cpp 使用 Metal 加速处理，先保留原始输出，再谨慎清理重复内容。发布包包含应用运行环境，模型文件由用户管理。",
+    approach: "应用通过 whisper.cpp 与 Metal 在本机运行 Whisper。重叠音频片段保持连续采集，也可能在片段边界产生重复文本。我先保存原始输出，再谨慎清理重复，并将两个版本与会话日志、配置一同保存。采集和推理通过异步工作线程运行，使界面保持响应。",
     highlights: [
-      { title: "本地音频处理管线", body: "我实现异步采集与推理工作线程、重叠片段处理，以及从 48 kHz 到 16 kHz 的重采样，让界面在转写时保持响应。" },
-      { title: "模型下载与管理", body: "我加入模型扫描、导入、选择和下载管理，通过精确文件大小与 SHA-256 检查、临时下载、重试处理和原子发布，避免损坏模型被当成可用文件。" },
-      { title: "保留原文，也提供可用文本", body: "我同时保存后端原始输出、谨慎去重后的文本、日志和会话配置。会话工具支持增量复制、安全重命名和完整历史恢复。" },
-      { title: "应用打包与发布", body: "我将 Python 与本地库打包为可独立运行的 macOS 应用，固定构建依赖，并测试应用包中的推理流程。" },
+      {
+        "title": "本地音频处理管线",
+        "body": "我用异步工作线程处理采集与推理，让音频处理时界面保持响应。麦克风音频经过缓冲，从 48 kHz 重采样为 Whisper 使用的 16 kHz 格式。"
+      },
+      {
+        "title": "模型下载与管理",
+        "body": "我加入模型扫描、导入、选择和下载管理，通过精确文件大小与 SHA-256 检查、临时下载、重试处理和原子发布，避免损坏模型被当成可用文件。"
+      },
+      {
+        "title": "保留原文，也提供可用文本",
+        "body": "我在片段边界去重之前保存后端原始输出。用户可以将整理后的文本与原文对照，同时查看模型、语言、日志和会话配置。"
+      },
+      {
+        "title": "应用打包与发布",
+        "body": "我将 Python 与本地库打包为可独立运行的 macOS 应用，固定构建依赖，并测试应用包中的推理流程。"
+      }
     ],
     architecture: [
-      { label: "音频采集", description: "麦克风音频、缓冲、重采样和异步工作线程。" },
-      { label: "本地推理", description: "将重叠片段送入上游 whisper.cpp，通过 Metal 加速推理。" },
-      { label: "保存转写记录", description: "先保存原始输出，再谨慎清理片段重复，保留日志和会话信息。" },
-      { label: "独立应用包", description: "PySide6 桌面界面、内置运行环境、经过验证且由用户管理的模型，以及发布文件检查。" },
+      {
+        "label": "加载经过完整性检查的模型",
+        "description": "下载文件先保存在临时位置，通过大小与 SHA-256 检查后才可用，也可以导入本地模型。"
+      },
+      {
+        "label": "转写时保持界面响应",
+        "description": "音频采集与本地推理异步运行，重叠片段送入 Metal 加速的后端。"
+      },
+      {
+        "label": "原始文本与整理文本并存",
+        "description": "每个会话保存 raw.txt、clean.txt，以及 session.log 和 config.json，便于将清理后的文本与后端输出对照。"
+      },
+      {
+        "label": "继续使用已保存的会话",
+        "description": "增量复制、安全重命名与完整历史恢复都基于保留的会话输出进行。"
+      }
     ],
     metrics: [
-      { ...transcriber.metrics[0], label: "当前公开版本", scope: "于 2026 年 10 月 11 日面向 macOS Apple Silicon 发布。" },
-      { ...transcriber.metrics[1], label: "音频重采样", scope: "将麦克风采集音频重采样为 Whisper 推理所需格式。" },
+      {
+        "value": "1.1.0",
+        "label": "当前公开版本",
+        "scope": "于 2026 年 10 月 11 日面向 macOS Apple Silicon 发布。"
+      }
     ],
     evidence: [
       { ...transcriber.evidence[0], title: "可下载的当前版本", description: "下载可独立运行的 macOS Apple Silicon 应用，支持本地转写、模型管理和会话历史保存。", scope: "1.1.0 版本，发布于 2026 年 10 月 11 日。" },
@@ -286,7 +450,7 @@ export const projectsZh: Project[] = [
     status: "已公开发布 alpha.3 预览版",
     tags: ["Python", "Tkinter", "FFmpeg", "Rubber Band", "pytest", "PyInstaller"],
     question: "不熟悉技术的音乐学习者，怎样分别调整音高与速度，同时保证原始音频不被改动？",
-    approach: "我采用模块化设计，将界面和控制器与校验、文件处理、外部工具及音频管线分离。FFmpeg/FFprobe 与 Rubber Band 执行音频处理，保留共振峰，并提供可预期的输出行为。",
+    approach: "FFmpeg/FFprobe 与 Rubber Band 负责音频检查、变调和变速。我让处理在后台运行，并把取消、文件名冲突与残缺输出作为应用需要处理的正常分支。源文件保持不变，输出文件通过独占创建避免覆盖已有文件。",
     highlights: [
       { title: "分别调整调性与练习速度", body: "我实现 -24 至 +24 半音的变调和 -95% 至 +400% 的变速，两项参数可独立设置，支持 MP3、M4A、WAV 和 FLAC 输入。" },
       { title: "取消后完成清理", body: "我加入后台处理、子进程组清理、不覆盖现有文件的独占输出创建、源文件保护，以及失败或取消时的残缺文件删除。" },
@@ -294,15 +458,39 @@ export const projectsZh: Project[] = [
       { title: "可以分发的预览版", body: "我将 Python 与音频工具打包，审计本地二进制和库引用，在另一台非开发 Mac 上验证，并准备许可证、对应源码、校验和及公开预览版。" },
     ],
     architecture: [
-      { label: "界面与控制器", description: "Tkinter 参数输入、校验、状态显示和后台任务协调。" },
-      { label: "音频处理管线", description: "FFprobe 检查与 FFmpeg/Rubber Band 处理，支持独立变调和变速。" },
-      { label: "保护文件", description: "独占创建输出、确定的命名规则、保留源文件，以及取消后的清理。" },
-      { label: "发布验证", description: "内置依赖、本地库审计、打包后的真实处理、校验和与对应源码。" },
+      {
+        "label": "分别选择调性与练习速度",
+        "description": "MP3、M4A、WAV、FLAC 输入支持 -24 至 +24 半音与 -95% 至 +400% 的速度调整。"
+      },
+      {
+        "label": "在后台完成处理",
+        "description": "FFmpeg 与 Rubber Band 执行音频处理时，界面仍保持响应。"
+      },
+      {
+        "label": "文件冲突时保留已有内容",
+        "description": "遇到已有输出时，以数字后缀分配新文件，并通过独占创建防止覆盖冲突。"
+      },
+      {
+        "label": "取消时终止进程并清理",
+        "description": "终止相关子进程组，清理残缺输出。发布检查中，源文件保持不变，也没有遗留残缺文件。"
+      }
     ],
     metrics: [
-      { ...audioshifter.metrics[0], label: "通过的测试", scope: "alpha.3 发布验证：165 项通过，0 项失败，0 项跳过。" },
-      { ...audioshifter.metrics[1], label: "已审计的本地二进制", scope: "alpha.3 应用包审计：75 个 arm64 Mach-O 文件和 324 条动态库引用。" },
-      { ...audioshifter.metrics[2], label: "输入音频格式", scope: "MP3、M4A、WAV 和 FLAC；固定输出 44.1 kHz、双声道、320 kbps MP3。" },
+      {
+        "value": "165",
+        "label": "通过的测试",
+        "scope": "alpha.3 测试覆盖参数校验、文件冲突、取消、失败清理、源文件保护与打包后处理。"
+      },
+      {
+        "value": "75",
+        "label": "已审计的本地二进制",
+        "scope": "alpha.3：检查 75 个 arm64 二进制及 324 条库引用，确认应用包的运行依赖。"
+      },
+      {
+        "value": "4",
+        "label": "输入音频格式",
+        "scope": "MP3、M4A、WAV 和 FLAC；固定输出 44.1 kHz、双声道、320 kbps MP3。"
+      }
     ],
     evidence: [
       { ...audioshifter.evidence[0], title: "alpha.3 发布验证", description: "记录包含测试、本地二进制审计、打包后的真实音频处理、取消、源文件保护，以及重新下载发布文件的检查。", scope: "v0.1.0-alpha.3 发布版本。" },

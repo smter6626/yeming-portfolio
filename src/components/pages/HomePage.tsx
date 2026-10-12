@@ -13,7 +13,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
     <section className="hero" aria-labelledby="intro-title">
       <div className="hero-copy"><p className="eyebrow">{zh ? "计算机科学 / 亚利桑那州立大学" : "Computer science / Arizona State University"}</p>
         <h1 id="intro-title">{zh ? <>让复杂系统<br /><em>真正有用。</em></> : <>Making complex<br />systems <em>useful.</em></>}</h1>
-        <p className="hero-description">{zh ? "我是 Yeming。我研究概率机器学习，构建带独立审查的 AI 编程流程，也开发服务学习场景的本地软件。先看看作品，再了解它们如何实现。" : "I'm Yeming. I work on probabilistic machine learning, AI coding workflows with independent review, and local tools for learning. Explore the work, then look inside."}</p>
+        <p className="hero-description">{zh ? "我是 Yeming，关注 AI 系统的可靠性。我研究概率模型的稳健性，设计独立审查与验收方法，并开发可追溯的编程流程和本地学习工具。" : "I'm Yeming. I work on AI reliability through probabilistic-model robustness, independent review and acceptance, and inspectable coding workflows. I also build local tools for learning."}</p>
         <div className="hero-actions"><a className="button-primary" href="#work">{zh ? "浏览作品" : "Explore my work"} <span aria-hidden="true">-&gt;</span></a><Link className="text-link" href={localePath(locale, "/resume/")}>{zh ? "查看简历" : "Read my resume"}</Link></div>
         <p className="hero-note">{zh ? "美国亚利桑那州坦佩 / 计算机科学学士，预计 2026 年 12 月毕业" : "Tempe, Arizona / B.S. Computer Science, Dec 2026"}</p>
       </div><Showcase projects={projects} locale={locale} />

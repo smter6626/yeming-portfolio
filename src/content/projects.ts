@@ -7,31 +7,67 @@ export const projects: Project[] = [
     title: "Probabilistic Circuits and Optimal Transport",
     shortTitle: "Robust ML",
     subtitle: "Probabilistic-model robustness and reproducible GPU experiments",
-    summary: "I study how probabilistic models handle changing data, and support that research with reproducible GPU experiments, validated results, and publication materials.",
+    summary: "I research robustness in probabilistic machine learning, combining collaborative research with experiment execution, failure analysis, and reproducible GPU workflows.",
     category: "Research",
     role: "Undergraduate researcher and PeTeR co-author",
     timeframe: "March 2026 - present",
     status: "Ongoing research",
     color: "#d4b9ef",
     tags: ["Probabilistic circuits", "Optimal transport", "PyTorch", "CUDA", "Slurm"],
-    question: "How can probabilistic models remain robust under distribution shift, and how can we build reproducible experiments to study them?",
-    approach: "The research investigates structured optimal-transport objectives and post-training robustification. I execute experiments, rebuild GPU environments, validate results, diagnose failures, and prepare materials for publication.",
+    question: "Can a trained probabilistic circuit become more robust to distribution shift without its original training data or retraining from scratch?",
+    approach: "PeTeR addresses this question through post-training robustification. As a co-author, I contributed experiment execution, result validation, engineering support, and supplementary experiment materials. In subsequent work, I ran a hyperparameter sweep and GPU learning experiments, auditing result coverage and retaining failures for numerical-stability analysis.",
     highlights: [
-      { title: "A published collaboration", body: "I co-authored PeTeR: Post-Training Robustification of Probabilistic Circuits, accepted at the UAI 2026 Workshop on Tractable Probabilistic Modeling. My contribution included experiment execution, result validation, engineering support, and paper-facing artifacts." },
-      { title: "Reproducible GPU workflows", body: "I rebuilt a Python 3.11 research environment with PyTorch/CUDA, Triton, and PyJuice on an ASU GPU cluster, including resolving a native-compilation blocker caused by missing Python development headers." },
-      { title: "Diagnosing experiment failures", body: "I audited result coverage and preserved failed runs with diagnostic evidence, including numerical instability, invalid probabilities, scheduler mismatches, and dataset-specific failures." },
-      { title: "Measured resource planning", body: "I used memory and execution-time measurements to tune concurrent GPU execution, and validated export/reload, checksums, sampling, and visualization in reusable benchmark workflows." },
+      {
+        "title": "PeTeR and reproducible experiment materials",
+        "body": "I co-authored PeTeR, accepted at the UAI 2026 Workshop on Tractable Probabilistic Modeling. I also prepared a supplementary experiment entry point with a short guide, benchmark data, and CSV table outputs to make the experiment workflow easier to inspect."
+      },
+      {
+        "title": "A sweep that retains its failures",
+        "body": "I executed and audited 1,120 configurations at each of K=1, 3, and 5, totaling 3,360. Some high-learning-rate settings produced invalid probabilities. I retained their error records and confirmed the handling with Adrian Ciotinga; the expected numerical failures were delivered alongside the other results."
+      },
+      {
+        "title": "Match GPU resources to the workload",
+        "body": "In a separate learning experiment across 28 datasets, warmup runs and memory telemetry informed concurrency. K=3 ran eight concurrent jobs on L40S; the higher-memory K=5 workload used A100 80GB. I checked scheduler state, error output, result files, and repository changes before each batch delivery."
+      },
+      {
+        "title": "Inspect results beyond job completion",
+        "body": "While monitoring experiments, I noticed disordered dataset images and anomalous data and reported them to Adrian. Alongside file-coverage checks, I used visualization and preserved diagnostic logs so that a completed job was still open to examination."
+      }
     ],
     architecture: [
-      { label: "Research objective", description: "Probabilistic circuits, distribution shift, and structured optimal transport." },
-      { label: "Reproducible environment", description: "Isolated dependencies, CUDA tooling, native compilation, and GPU Slurm jobs." },
-      { label: "Experiment execution", description: "Experiment configurations, measured concurrency, execution-time measurements, and preserved failure logs." },
-      { label: "Result verification", description: "Result coverage checks, serialization/reload, failure classification, and incremental delivery." },
+      {
+        "label": "Study robustness",
+        "description": "PeTeR studies data-free post-training robustness; later work includes a hyperparameter sweep and a separate probabilistic-circuit learning experiment."
+      },
+      {
+        "label": "Measure before scheduling",
+        "description": "Reconstruct the GPU environment, run warmup workloads, and use memory telemetry to choose hardware and concurrency."
+      },
+      {
+        "label": "Audit coverage and failures",
+        "description": "Check job and error status, expected result files, and failed configurations. Retain the error records used for numerical-stability discussion."
+      },
+      {
+        "label": "Deliver inspectable experiments",
+        "description": "Submit results in reviewed batches and prepare a readable supplementary runner with instructions and CSV outputs."
+      }
     ],
     metrics: [
-      { value: "3,360", label: "Experiment configurations", scope: "Configurations in the full-length follow-up study." },
-      { value: "28", label: "Benchmark datasets", scope: "Follow-up study with complete JSON outputs across 28 datasets." },
-      { value: "8", label: "Concurrent L40S runs", scope: "Concurrent execution for the research workload, with approximately 12 GiB peak memory." },
+      {
+        "value": "3,360",
+        "label": "Sweep configurations audited",
+        "scope": "K=1, 3, and 5: 1,120 configurations each, including recorded numerical failures."
+      },
+      {
+        "value": "28",
+        "label": "Datasets in the learning experiment",
+        "scope": "Separate learning runs: expected result files present and non-empty at K=1, 3, and 5."
+      },
+      {
+        "value": "8",
+        "label": "Concurrent GPU jobs",
+        "scope": "K=3 on L40S; the higher-memory K=5 runs used A100 80GB."
+      }
     ],
     evidence: [
       { title: "PeTeR paper", description: "PeTeR: Post-Training Robustification of Probabilistic Circuits, by Adrian Ciotinga, Yeming Dai, and YooJung Choi.", kind: "publication", scope: "UAI 2026 Workshop on Tractable Probabilistic Modeling; arXiv:2607.07671.", href: "https://arxiv.org/abs/2607.07671" },
@@ -43,25 +79,25 @@ export const projects: Project[] = [
   {
     id: "governance",
     number: "02",
-    title: "Keeping Long-Running AI Work on Track",
-    shortTitle: "AI workflow method",
+    title: "Independent Review and Acceptance for Long-Running AI Work",
+    shortTitle: "AI review method",
     subtitle: "Independent review, evidence, and accountable decisions",
     summary: "I designed a method for making AI work inspectable: separate generation from acceptance, review actual artifacts, and preserve the evidence behind current decisions.",
     category: "Agent systems",
     role: "Methodology author",
     timeframe: "v1.2 published August 2026",
-    status: "Bilingual methodology publication",
+    status: "Published technical note in English and Chinese",
     color: "#d9ed92",
     tags: ["Project rules", "Progress tracking", "Independent review", "Git"],
-    question: "When AI produces work faster than people can verify it, how can acceptance rest on sufficient evidence, and how can errors be kept from propagating through later tasks?",
+    question: "How can we challenge an agent's self-checks and keep an overturned acceptance from guiding later work?",
     approach: "I separate generation from acceptance and keep task requirements, accepted state, and decision history in repository documents. An independent reviewer inspects the actual artifacts, forms its own judgment, and challenges whether the chosen checks are sufficient. Review depth follows task risk; decisions about intent, sensitive facts, or irreversible actions return to the human owner. New evidence can invalidate an earlier acceptance, with that change recorded explicitly so later sessions use the current conclusion.",
     narrative: [
       {
         "id": "approach",
-        "title": "Generation scales. Verification needs structure.",
+        "title": "A self-check passed. The artifact still had a defect.",
         "navLabel": "The trust problem",
         "paragraphs": [
-          "When AI produces work faster than people can verify it, how can we decide which results deserve acceptance? I developed this method around that question, focusing on the evidence and authority behind each decision."
+          "AI can produce more work than a person can inspect line by line. My starting point was a concrete acceptance problem: an agent passed its own checks, but independent inspection found a defect in the same artifact. Once an approval is recorded, later sessions can inherit it as fact."
         ],
         "points": [
           {
@@ -106,7 +142,7 @@ export const projects: Project[] = [
         "points": [
           {
             "title": "A PDF that passed self-checks but failed independent review",
-            "body": "The PDF looked correct and passed the coding agent's chosen text extraction check. Another extraction path revealed body paragraphs appearing after the signature. Independent review overturned the acceptance; a renderer repair and multiple extraction checks produced the replacement artifact."
+            "body": "The PDF looked correct and passed the coding agent's chosen text extraction check. Another extraction path revealed body paragraphs appearing after the signature. Independent review overturned the acceptance; a renderer repair and multiple extraction checks produced the replacement artifact. This changed my definition of independent review: the reviewer must judge whether the verification is sufficient, and be able to choose another evidence path."
           },
           {
             "title": "An audio-app release tied to its actual package",
@@ -132,14 +168,45 @@ export const projects: Project[] = [
       { value: "2", label: "Documented cases", scope: "Job-application preparation and AudioShifter release engineering." },
     ],
     evidence: [
-      { title: "Bilingual publication and citation", description: "The v1.2 technical artifact includes English and Chinese manuscripts, PDFs, machine-readable citation metadata, and publication checksums.", kind: "publication", scope: "Version-specific DOI 10.5281/zenodo.21911982, published August 13, 2026.", href: "https://doi.org/10.5281/zenodo.21911982" },
-      { title: "A successful check that missed a PDF defect", description: "The coding agent's own check passed, but an independent review found that text appeared in the wrong reading order. The earlier approval was withdrawn, the renderer was repaired, and the PDF was checked through multiple extraction methods.", kind: "case-study", scope: "PDF preparation case documented in v1.2.", href: "https://github.com/smter6626/structured-llm-execution-framework" },
-      { title: "Software-release evidence chain", description: "The AudioShifter case connects tests, package audits, tagged source, checksums, non-development-machine acceptance, and downloaded release assets.", kind: "case-study", scope: "AudioShifter alpha.3 release engineering.", href: "https://github.com/smter6626/AudioShifter/blob/main/macos/release/release_verification_v0.1.0-alpha.3.md" },
+      {
+        "title": "Method article and citation",
+        "description": "The v1.2 technical artifact includes English and Chinese manuscripts, PDFs, machine-readable citation metadata, and publication checksums.",
+        "kind": "publication",
+        "scope": "Version-specific DOI 10.5281/zenodo.21911982, published August 13, 2026.",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-en.md"
+      },
+      {
+        "title": "A successful check that missed a PDF defect",
+        "description": "The coding agent's own check passed, but an independent review found that text appeared in the wrong reading order. The earlier approval was withdrawn, the renderer was repaired, and the PDF was checked through multiple extraction methods.",
+        "kind": "case-study",
+        "scope": "PDF preparation case documented in v1.2.",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-en.md"
+      },
+      {
+        "title": "Software-release evidence chain",
+        "description": "The AudioShifter case connects tests, package audits, tagged source, checksums, non-development-machine acceptance, and downloaded release assets.",
+        "kind": "case-study",
+        "scope": "AudioShifter alpha.3 release engineering.",
+        "href": "https://github.com/smter6626/AudioShifter/blob/main/macos/release/release_verification_v0.1.0-alpha.3.md"
+      }
     ],
     limitations: [],
     links: [
-      { label: "Methodology repository", href: "https://github.com/smter6626/structured-llm-execution-framework", kind: "source" },
-      { label: "Read v1.2 publication", href: "https://doi.org/10.5281/zenodo.21911982", kind: "publication" },
+      {
+        "label": "Read the method",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework/blob/v1.2/structured-llm-execution-framework-en.md",
+        "kind": "publication"
+      },
+      {
+        "label": "Methodology repository",
+        "href": "https://github.com/smter6626/structured-llm-execution-framework",
+        "kind": "source"
+      },
+      {
+        "label": "Version DOI",
+        "href": "https://doi.org/10.5281/zenodo.21911982",
+        "kind": "publication"
+      }
     ],
     related: ["1pcloop", "audioshifter"],
   },
@@ -161,11 +228,11 @@ export const projects: Project[] = [
     narrative: [
       {
         "id": "approach",
-        "title": "When generation outpaces human review.",
+        "title": "Turn an acceptance method into a running system.",
         "navLabel": "The trust problem",
         "paragraphs": [
-          "When AI generates code and artifacts faster than people can inspect them, how can we decide what to accept and keep insufficiently checked results from becoming assumptions in later work?",
-          "I built this workflow to turn the framework's review and acceptance method into an executable coding process. It gives implementation, independent review, and human decisions explicit roles."
+          "When AI generates code faster than people can inspect it, I want to know which version was reviewed, what supports acceptance, and when a human needs to intervene. I built this coding workflow to make those decisions explicit during execution.",
+          "The system handles two different questions. A reviewer judges code, tests, and artifacts against acceptance criteria. Python validates the decision format, commit relationships, and evidence identity so the recorded decision refers to the version that was actually reviewed."
         ]
       },
       {
@@ -173,7 +240,7 @@ export const projects: Project[] = [
         "title": "Separate generation from acceptance.",
         "navLabel": "The review workflow",
         "paragraphs": [
-          "Task constraints and acceptance criteria govern the cycle. A coding agent produces the work; an independent review agent examines the artifacts and judges whether the evidence supports acceptance."
+          "The implementation routes a bounded task through coding and independent review. A review can accept the result, ask for a repair, or stop for a human decision."
         ],
         "steps": [
           {
@@ -196,37 +263,76 @@ export const projects: Project[] = [
       },
       {
         "id": "architecture",
-        "title": "Carry accepted state across sessions.",
-        "navLabel": "State & recovery",
+        "title": "Why the two agents use different sessions.",
+        "navLabel": "Design choices",
         "paragraphs": [
-          "I keep task requirements and current progress in repository records, with checkpoints for execution and recovery. New sessions can reconstruct the task from those records and the actual project."
+          "I keep the review session across turns to retain the task's decision history. Each coding turn starts fresh from the current bounded instruction, so the implementation can be handed to another session without inheriting the reviewer's whole conversation."
         ],
         "points": [
           {
-            "title": "Bind the decision to the reviewed artifact",
-            "body": "I check branches, commit ancestry, permitted paths, project-rule hashes, and evidence SHA-256 values before a state update. These checks connect the review decision to a specific version of the work."
+            "title": "Continuity requires freshness checks",
+            "body": "A persistent reviewer can retain outdated assumptions. I reconstruct its authoritative inputs from project rules, current state, Git, and artifacts. State changes refresh those inputs; changed long-term requirements restart the review session. Session history supplies working context, while repository records determine the current task."
           },
           {
-            "title": "Recover with explicit uncertainty handling",
-            "body": "Checkpoints retain agent-turn identity, review context, and state updates. Resume checks reconcile interrupted work and avoid repeating completed turns. Unexplained drift stops for human review."
+            "title": "A verdict must refer to a specific version",
+            "body": "Branch, commit-ancestry, path, and SHA-256 checks bind the verdict to the reviewed files. Semantic acceptance remains the reviewer's decision. Maintaining these identity and refresh checks is part of the cost of keeping the review session."
+          },
+          {
+            "title": "Recovery reconciles work before repeating it",
+            "body": "Checkpoints record completed turns and state updates. Resume checks determine which operations completed before an interruption; unexplained changes stop for human review. Record publication can resume separately after the coding work is finished."
           }
         ]
       },
       {
         "id": "practice",
-        "title": "Run the review cycle on a real project.",
+        "title": "What happened in the classroom-transcriber task.",
         "navLabel": "In practice",
         "paragraphs": [
-          "A multilingual classroom-transcription task ran through three review cycles, seven agent turns, and two project commits. Independent review and human checks included live Japanese and French transcription.",
-          "I also built a read-only terminal dashboard that shows the task verdict, progress update, and publication of supporting records separately. It makes the current result and any decision awaiting a human visible."
+          "I ran the workflow in my Classroom Live Transcriber repository to expand original-audio language selection. The accepted run followed an earlier attempt in which code and tests were produced, but the tool sandbox prevented the required Git commit."
+        ],
+        "points": [
+          {
+            "title": "A completion report conflicted with repository state",
+            "body": "The commit failed, HEAD stayed unchanged, and the worktree contained edits. The control checks stopped the run. I retained recovery evidence, restored the baseline, corrected the execution configuration, and revalidated before retrying."
+          },
+          {
+            "title": "Review added a documentation step",
+            "body": "In the successful run, the reviewer accepted the implementation and requested a bounded documentation follow-up explaining transcription language versus UI language and English-only model restrictions. The second cycle completed the documentation; the third confirmed that no further code changes were needed."
+          },
+          {
+            "title": "Human acceptance checked actual audio",
+            "body": "I then successfully transcribed live Japanese and French audio. The run comprised three cycles, seven agent turns, and two commits, with the review decisions determining when implementation was complete and ready for this check."
+          }
         ]
+      },
+      {
+        "id": "observability",
+        "title": "Show acceptance and recordkeeping separately.",
+        "navLabel": "Operator view",
+        "paragraphs": [
+          "The terminal dashboard shows whether the task was accepted, whether the current progress record was updated, and whether the evidence summary was committed and pushed. A task can be accepted while its records still need to be saved or published.",
+          "Per-turn summaries retain the reviewed versions, artifact locations, hashes, and inspection results in the workflow repository. If publication fails, the system can retry that operation without rerunning completed coding work."
+        ],
+        "points": []
       }
     ],
     highlights: [
-      { title: "Separate generation from acceptance", body: "I give implementation and acceptance different roles. Fresh coding sessions produce changes and tests; a persistent review session inspects the artifacts against acceptance criteria and can request further checks." },
-      { title: "Bind acceptance to the reviewed artifact", body: "I validate structured responses, branches, commit ancestry, project-rule hashes, permitted file paths, and SHA-256 hashes before an explicitly authorized progress update." },
-      { title: "Resume without repeating completed work", body: "I added safely written checkpoints and checks for interrupted updates. The same review session can correct at most two mechanical reporting errors without rerunning completed coding work." },
-      { title: "Show what actually succeeded", body: "I built a progress log, command-line tools, and a read-only terminal dashboard that separately show task outcome, progress-record updates, and publication of the supporting records." },
+      {
+        "title": "Separate generation from acceptance",
+        "body": "I give implementation and acceptance different roles. Fresh coding sessions produce changes and tests; a persistent review session inspects the artifacts against acceptance criteria and can request further checks."
+      },
+      {
+        "title": "Bind acceptance to the reviewed artifact",
+        "body": "I validate structured responses, branches, commit ancestry, project-rule hashes, permitted file paths, and SHA-256 hashes before an explicitly authorized progress update."
+      },
+      {
+        "title": "Resume without repeating completed work",
+        "body": "I added safely written checkpoints and checks for interrupted updates. The same review session can correct at most two mechanical reporting errors without rerunning completed coding work."
+      },
+      {
+        "title": "Show what actually succeeded",
+        "body": "I built a dashboard that separates task acceptance, progress-record updates, and evidence commit/push status, with independent publication recovery after the coding work is complete."
+      }
     ],
     architecture: [
       { label: "Load the current task", description: "Read the project rules, current progress, repository identity, and checks for outdated inputs." },
@@ -235,13 +341,41 @@ export const projects: Project[] = [
       { label: "Review and record acceptance", description: "Judge the evidence against acceptance criteria, validate artifact identity, then record an authorized result, request a repair, or pause for human judgment." },
     ],
     metrics: [
-      { value: "3 cycles", label: "Real project task", scope: "Multilingual transcriber task spanning 7 agent turns and 2 project commits." },
-      { value: "3 states", label: "Separate outcomes", scope: "Task outcome, progress updates, and publication of supporting records." },
+      {
+        "value": "3 cycles",
+        "label": "Classroom-transcriber development task",
+        "scope": "Implementation, documentation follow-up, and final confirmation; 7 agent turns and 2 commits."
+      }
     ],
     evidence: [
-      { title: "Working implementation", description: "The source includes agent routing, structured-response checks, saved progress and recovery, command-line tools, and a read-only terminal dashboard.", kind: "implementation", scope: "Runs locally on macOS with two isolated Codex role sessions, one active workflow, and one agent editing the project at a time.", href: "https://github.com/smter6626/framework-loop/tree/main/1PCloop" },
-      { title: "A real transcription-project task", description: "A transcriber change went through multiple cycles, independent review, and human approval. Japanese and French live transcription were manually checked; other paths were supported by tests and code review.", kind: "validation", scope: "Multilingual classroom transcription task.", href: "https://github.com/smter6626/framework-loop/blob/main/1PCloop/docs/p51_medium_scale_stage_summary.md" },
-      { title: "Live-agent integration test", description: "The record follows a review-agent instruction, coding-agent implementation, and independent review through one progress update. It also checks record publication and read-only dashboard behavior in a real terminal.", kind: "validation", scope: "Live-agent integration test, September 18, 2026.", href: "https://github.com/smter6626/framework-loop/blob/main/1PCloop/evidence-summaries/f7-post-foundation-real-service-smoke-20260918.md" },
+      {
+        "title": "Working implementation",
+        "description": "The source includes agent routing, structured-response checks, saved progress and recovery, command-line tools, and a read-only terminal dashboard.",
+        "kind": "implementation",
+        "scope": "Runs locally on macOS with two isolated Codex role sessions, one active workflow, and one agent editing the project at a time.",
+        "href": "https://github.com/smter6626/framework-loop/tree/main/1PCloop"
+      },
+      {
+        "title": "A real transcription-project task",
+        "description": "The task added original-language choices and model restrictions. Review requested a documentation follow-up, then human acceptance checked live Japanese and French transcription.",
+        "kind": "validation",
+        "scope": "Multilingual classroom transcription task.",
+        "href": "https://github.com/smter6626/framework-loop/blob/main/1PCloop/docs/p51_medium_scale_stage_summary.md"
+      },
+      {
+        "title": "Live-agent integration test",
+        "description": "The record follows a review-agent instruction, coding-agent implementation, and independent review through one progress update. It also checks record publication and read-only dashboard behavior in a real terminal.",
+        "kind": "validation",
+        "scope": "Live-agent integration test, September 18, 2026.",
+        "href": "https://github.com/smter6626/framework-loop/blob/main/1PCloop/evidence-summaries/f7-post-foundation-real-service-smoke-20260918.md"
+      },
+      {
+        "title": "Per-turn evidence summaries",
+        "description": "Public records connect implementation and review decisions to versions, artifact locations, and validation results.",
+        "kind": "implementation",
+        "scope": "Curated records in the workflow repository.",
+        "href": "https://github.com/smter6626/framework-loop/tree/main/1PCloop/evidence-summaries"
+      }
     ],
     limitations: [
       "Runs locally on macOS with one coding agent editing the project at a time. A human approves integration and release decisions.",
@@ -264,22 +398,49 @@ export const projects: Project[] = [
     image: "/images/transcriber.png",
     tags: ["Python", "PySide6", "whisper.cpp", "Metal", "Audio streaming", "PyInstaller"],
     question: "How can students follow live lectures using on-device transcription without a cloud transcription service or a preconfigured development environment?",
-    approach: "I separate the UI, microphone capture, buffering and resampling, transcription engine, local inference backend, and persistence. Overlapping audio chunks run through whisper.cpp with Metal acceleration; raw output is preserved before conservative cleanup, and packaged releases include Python and the required libraries while models remain user-managed.",
+    approach: "The app runs Whisper locally through whisper.cpp and Metal. Overlapping audio chunks keep capture continuous, but can repeat words at chunk boundaries. I preserve the original output before applying conservative cleanup, then save both versions with the session log and configuration. Capture and inference run in asynchronous workers so the UI can remain responsive.",
     highlights: [
-      { title: "A local audio pipeline", body: "I built asynchronous capture and inference workers, overlapping chunk processing, and 48 kHz-to-16 kHz resampling to keep the interface responsive during transcription." },
-      { title: "Model downloads and management", body: "I added model scanning, import, selection, and managed downloads with exact-size and SHA-256 checks, temporary staging, retry handling, and atomic publication." },
-      { title: "Original transcripts and clean text", body: "I preserve backend output alongside conservatively deduplicated text, logs, and session configuration. Session tools support incremental copying, safe renaming, and full-history recovery." },
-      { title: "Packaging and release engineering", body: "I packaged Python and native libraries into a standalone macOS app, pinned build dependencies, and tested inference in the packaged application." },
+      {
+        "title": "A local audio pipeline",
+        "body": "I built asynchronous capture and inference workers to keep the interface responsive while audio is processed. Microphone audio is buffered and resampled from 48 kHz to the 16 kHz format used by Whisper."
+      },
+      {
+        "title": "Model downloads and management",
+        "body": "I added model scanning, import, selection, and managed downloads with exact-size and SHA-256 checks, temporary staging, retry handling, and atomic publication."
+      },
+      {
+        "title": "Original transcripts and clean text",
+        "body": "I save raw backend output before boundary-overlap deduplication. Users can compare the clean transcript with the original, while the model, language, logs, and session configuration remain available for inspection."
+      },
+      {
+        "title": "Packaging and release engineering",
+        "body": "I packaged Python and native libraries into a standalone macOS app, pinned build dependencies, and tested inference in the packaged application."
+      }
     ],
     architecture: [
-      { label: "Capture", description: "Microphone audio, buffering, resampling, and asynchronous workers." },
-      { label: "Local inference", description: "Overlapping chunks passed to upstream whisper.cpp with Metal acceleration." },
-      { label: "Transcript persistence", description: "Raw output first, conservative overlap cleanup, logs, and session metadata." },
-      { label: "Packaged application", description: "PySide6 desktop UI, bundled Python and libraries, verified user-managed models, and release-file checks." },
+      {
+        "label": "Load a verified model",
+        "description": "Downloads remain temporary until exact-size and SHA-256 checks pass. Users can also import a local model."
+      },
+      {
+        "label": "Transcribe while keeping the UI responsive",
+        "description": "Audio capture and local inference run asynchronously. Overlapping chunks feed the Metal-enabled backend."
+      },
+      {
+        "label": "Keep the original beside the cleaned text",
+        "description": "Each session saves raw.txt and clean.txt plus session.log and config.json, so cleaned output can be checked against what the backend produced."
+      },
+      {
+        "label": "Continue working with saved sessions",
+        "description": "Incremental copying, safe renaming, and full-history recovery operate on the retained session outputs."
+      }
     ],
     metrics: [
-      { value: "1.1.0", label: "Current public release", scope: "Published October 11, 2026 for macOS on Apple Silicon." },
-      { value: "48 -> 16 kHz", label: "Audio resampling", scope: "Microphone capture resampled for Whisper inference." },
+      {
+        "value": "1.1.0",
+        "label": "Current public release",
+        "scope": "Published October 11, 2026 for macOS on Apple Silicon."
+      }
     ],
     evidence: [
       { title: "Current downloadable release", description: "Download the standalone macOS Apple Silicon app with local transcription, model management, and saved session history.", kind: "validation", scope: "Release 1.1.0, October 11, 2026.", href: "https://github.com/smter6626/live_subtitle_generator/releases/tag/1.1.0" },
@@ -309,7 +470,7 @@ export const projects: Project[] = [
     image: "/images/audioshifter.png",
     tags: ["Python", "Tkinter", "FFmpeg", "Rubber Band", "pytest", "PyInstaller"],
     question: "How can non-technical music learners adjust pitch and speed independently while keeping their original audio safe?",
-    approach: "I designed a modular local macOS application, separating the UI and controller from validation, file handling, external tools, and the processing pipeline. FFmpeg/FFprobe and Rubber Band perform the audio processing, with formant preservation and predictable output behavior.",
+    approach: "FFmpeg/FFprobe and Rubber Band handle audio inspection, pitch, and tempo processing. I run that work in the background and treat cancellation, filename conflicts, and partial outputs as normal paths the app must handle. Source files stay unchanged, and output creation is exclusive to avoid overwriting an existing file.",
     highlights: [
       { title: "Independent learning controls", body: "I implemented independently configurable pitch changes from -24 to +24 semitones and speed changes from -95% to +400%, with MP3, M4A, WAV, and FLAC inputs." },
       { title: "Cancellation with cleanup", body: "I added background processing, child-process-group cleanup, exclusive non-overwriting output creation, source-file protection, and partial-file removal on failures or cancellation." },
@@ -317,15 +478,39 @@ export const projects: Project[] = [
       { title: "A distributable release", body: "I bundled Python and audio tools, audited native binaries and library references, validated on a separate non-development Mac, and prepared licensing, corresponding source, checksums, and a public pre-release." },
     ],
     architecture: [
-      { label: "UI and controller", description: "Tkinter inputs, validation, status, and background-job coordination." },
-      { label: "Audio pipeline", description: "FFprobe inspection and FFmpeg/Rubber Band processing with independent pitch and speed." },
-      { label: "Protected file handling", description: "Exclusive output creation, deterministic names, source preservation, and cancellation cleanup." },
-      { label: "Release verification", description: "Bundled dependencies, native-library audits, real packaged processing, checksums, and corresponding source." },
+      {
+        "label": "Choose pitch and practice speed independently",
+        "description": "Set -24 to +24 semitones and -95% to +400% speed change for MP3, M4A, WAV, or FLAC input."
+      },
+      {
+        "label": "Process in the background",
+        "description": "The interface remains responsive while FFmpeg and Rubber Band perform the audio work."
+      },
+      {
+        "label": "Resolve output conflicts without overwriting",
+        "description": "Existing files retain their contents; numbered suffixes allocate a new output, with exclusive creation protecting against conflicts."
+      },
+      {
+        "label": "Cancel and clean up",
+        "description": "Cancellation terminates the related process group and removes partial output. Release checks observed the source file unchanged and no leftover partial files."
+      }
     ],
     metrics: [
-      { value: "165", label: "Tests passed", scope: "alpha.3 release verification: 165 passed, 0 failed, 0 skipped." },
-      { value: "75", label: "Native binaries audited", scope: "alpha.3 package audit: 75 arm64 Mach-O files and 324 dynamic library references." },
-      { value: "4", label: "Input audio formats", scope: "MP3, M4A, WAV, and FLAC; fixed 44.1 kHz stereo 320 kbps MP3 output." },
+      {
+        "value": "165",
+        "label": "Tests passed",
+        "scope": "alpha.3 tests cover validation, conflicts, cancellation, failure cleanup, source preservation, and packaged processing."
+      },
+      {
+        "value": "75",
+        "label": "Native binaries audited",
+        "scope": "alpha.3: 75 arm64 binaries and 324 library references checked for dependencies on the development environment."
+      },
+      {
+        "value": "4",
+        "label": "Input audio formats",
+        "scope": "MP3, M4A, WAV, and FLAC; fixed 44.1 kHz stereo 320 kbps MP3 output."
+      }
     ],
     evidence: [
       { title: "Alpha.3 release verification", description: "The record documents tests, native-binary audits, packaged real-audio processing, cancellation, source preservation, and download-back checks.", kind: "validation", scope: "Release v0.1.0-alpha.3.", href: "https://github.com/smter6626/AudioShifter/blob/main/macos/release/release_verification_v0.1.0-alpha.3.md" },

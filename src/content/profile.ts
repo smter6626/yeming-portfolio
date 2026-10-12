@@ -8,7 +8,7 @@ export const profile: Profile = {
   github: "https://github.com/smter6626",
   headline: "Abstract thinking. Workflow design. Automation.",
   introduction:
-    "I'm good at finding patterns in complex problems and turning repetitive tasks into clear, reusable workflows. I enjoy building automation that handles tedious steps and makes more room for judgment and creative work.",
+    "I enjoy turning repetitive work into reusable systems. I start by separating what must stay fixed from what new evidence can change, and which decisions a system can make from those that need a person. I apply that thinking to AI review workflows and local software, from preserving original transcripts to recovering interrupted work. My research interests center on AI reliability and trustworthy automation.",
   education: [
     {
       institution: "Arizona State University",
