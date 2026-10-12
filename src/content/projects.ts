@@ -45,19 +45,79 @@ export const projects: Project[] = [
     number: "02",
     title: "Keeping Long-Running AI Work on Track",
     shortTitle: "AI workflow method",
-    subtitle: "Project rules, current progress, and decisions backed by evidence",
-    summary: "I designed a documented method for helping AI agents resume work with the right project rules, current progress, and independently checked results.",
+    subtitle: "Independent review, evidence, and accountable decisions",
+    summary: "I designed a method for making AI work inspectable: separate generation from acceptance, review actual artifacts, and preserve the evidence behind current decisions.",
     category: "Agent systems",
     role: "Methodology author",
     timeframe: "v1.2 published August 2026",
     status: "Bilingual methodology publication",
     color: "#d9ed92",
     tags: ["Project rules", "Progress tracking", "Independent review", "Git"],
-    question: "When an AI agent returns to a long-running task, how can it know which rules still apply, what is complete, and which results need another check?",
-    approach: "I keep project rules, current progress, and decision history in separate repository documents. The human owner, independent review agent, and coding agent have different permissions. Progress changes only when supporting files, test results, or human decisions justify it. Replaced decisions remain in the history but are clearly marked so they cannot silently guide later work.",
+    question: "When AI produces work faster than people can verify it, how can acceptance rest on sufficient evidence, and how can errors be kept from propagating through later tasks?",
+    approach: "I separate generation from acceptance and keep task requirements, accepted state, and decision history in repository documents. An independent reviewer inspects the actual artifacts, forms its own judgment, and challenges whether the chosen checks are sufficient. Review depth follows task risk; decisions about intent, sensitive facts, or irreversible actions return to the human owner. New evidence can invalidate an earlier acceptance, with that change recorded explicitly so later sessions use the current conclusion.",
+    narrative: [
+      {
+        "id": "approach",
+        "title": "Generation scales. Verification needs structure.",
+        "navLabel": "The trust problem",
+        "paragraphs": [
+          "When AI produces work faster than people can verify it, how can we decide which results deserve acceptance? I developed this method around that question, focusing on the evidence and authority behind each decision."
+        ],
+        "points": [
+          {
+            "title": "Self-checks can share the implementation's blind spots",
+            "body": "An agent can run tests honestly and still choose a verification path that misses the defect. Acceptance requires judgment about whether those checks actually challenge the result."
+          },
+          {
+            "title": "An old approval can become a new assumption",
+            "body": "Later sessions can inherit a polished artifact or an earlier approval as established fact. Long-running work needs an explicit record of which conclusions remain valid and which have been overturned."
+          }
+        ]
+      },
+      {
+        "id": "contributions",
+        "title": "Make acceptance inspectable and accountable.",
+        "navLabel": "The method",
+        "paragraphs": [
+          "I separate implementation from acceptance, and organize repository records by their responsibilities, update frequency, and editing authority. The method connects each accepted result to evidence a reviewer can inspect."
+        ],
+        "points": [
+          {
+            "title": "Independent access, judgment, and evidence challenge",
+            "body": "A reviewer examines the actual artifacts, reaches its own acceptance decision, and judges whether the verification is sufficient. It can request another test or extraction path when the existing checks leave the claim unresolved."
+          },
+          {
+            "title": "Requirements and accepted state have different owners",
+            "body": "Stable requirements preserve the owner's intent and constraints. Current state records accepted work, open issues, and supporting evidence. An implementation step receives a bounded objective and permitted changes."
+          },
+          {
+            "title": "New evidence can overturn an earlier acceptance",
+            "body": "I preserve the earlier record and explicitly invalidate its conclusion. Later sessions can trace the history while continuing from the current decision. Human judgment remains part of decisions about intent, sensitive facts, and irreversible actions."
+          }
+        ]
+      },
+      {
+        "id": "architecture",
+        "title": "Cases that shaped the method.",
+        "navLabel": "Practical cases",
+        "paragraphs": [
+          "The method developed through real artifact production and release work. These cases shaped both the definition of independent review and how much process a task needs."
+        ],
+        "points": [
+          {
+            "title": "A PDF that passed self-checks but failed independent review",
+            "body": "The PDF looked correct and passed the coding agent's chosen text extraction check. Another extraction path revealed body paragraphs appearing after the signature. Independent review overturned the acceptance; a renderer repair and multiple extraction checks produced the replacement artifact."
+          },
+          {
+            "title": "An audio-app release tied to its actual package",
+            "body": "For AudioShifter, I concentrated checks around package and release identity: tests, native dependencies, tagged source, checksums, a separate Mac, and downloaded release assets. The review structure followed the concentrated release risks."
+          }
+        ]
+      }
+    ],
     highlights: [
       { title: "Rules and progress stay separate", body: "I separated stable project requirements from current progress and decision history. Each task has one current step, and closed task records are preserved rather than overwritten by new work." },
-      { title: "Review the work directly", body: "I defined independent review around direct inspection of files and results, a separate assessment, and explicit acceptance criteria." },
+      { title: "Review the work directly", body: "I defined independent review around direct access to artifacts, an independent acceptance decision, and judgment about whether the verification itself is sufficient. A reviewer can challenge the chosen tests and require another verification path." },
       { title: "Replaced decisions stay replaced", body: "I specified how new evidence overturns an earlier accepted result while preserving its history, so a later session cannot silently reuse an outdated approval." },
       { title: "Match the process to the risk", body: "I documented job-application preparation and an AudioShifter release to show how the amount of review and recordkeeping can reflect each task's risk." },
     ],
@@ -88,19 +148,83 @@ export const projects: Project[] = [
     number: "03",
     title: "Recoverable AI Coding Workflow",
     shortTitle: "AI coding workflow",
-    subtitle: "Coding, independent review, and recovery on one computer",
-    summary: "I built a Python system that passes work between a coding agent and an independent review agent, records their results, and can resume after an interruption.",
+    subtitle: "Independent review and acceptance backed by evidence",
+    summary: "I built a Python workflow that separates code generation from acceptance, connects review decisions to code and test artifacts, and preserves accepted state across sessions.",
     category: "Agent systems",
     role: "System designer and implementation owner",
     timeframe: "September - October 2026",
     status: "Working local implementation",
     color: "#d9ed92",
     tags: ["Python", "Codex CLI", "JSON Schema", "Git", "Checkpoints", "Terminal dashboard"],
-    question: "How can AI coding work move forward only after a valid review, and resume safely without repeating work that is already complete?",
-    approach: "Python loads the current project rules and progress, sends a limited instruction to a new coding-agent session, and returns the code changes and test results to an independent review agent. It checks structured decisions, commits, and file hashes before updating progress. Saved checkpoints help reconcile interrupted work; unexplained changes stop the workflow for human review.",
+    question: "When AI generates code and artifacts faster than people can inspect them, how can we decide what to accept and keep insufficiently checked results from becoming assumptions in later work?",
+    approach: "I implemented the framework's review and acceptance method as a Python coding workflow. Task constraints and acceptance criteria guide separate coding and review agents. The reviewer directly inspects code, tests, and artifacts, judges whether the evidence supports acceptance, and can request further checks or repairs. The orchestrator validates commit identities, file hashes, and structured decisions before recording an authorized acceptance. Unresolved evidence, state conflicts, and decisions requiring human judgment pause the workflow. Checkpoints preserve review context and accepted state for subsequent sessions.",
+    narrative: [
+      {
+        "id": "approach",
+        "title": "When generation outpaces human review.",
+        "navLabel": "The trust problem",
+        "paragraphs": [
+          "When AI generates code and artifacts faster than people can inspect them, how can we decide what to accept and keep insufficiently checked results from becoming assumptions in later work?",
+          "I built this workflow to turn the framework's review and acceptance method into an executable coding process. It gives implementation, independent review, and human decisions explicit roles."
+        ]
+      },
+      {
+        "id": "contributions",
+        "title": "Separate generation from acceptance.",
+        "navLabel": "The review workflow",
+        "paragraphs": [
+          "Task constraints and acceptance criteria govern the cycle. A coding agent produces the work; an independent review agent examines the artifacts and judges whether the evidence supports acceptance."
+        ],
+        "steps": [
+          {
+            "label": "Define the current task",
+            "description": "The reviewer reads project requirements and current state, then specifies a bounded instruction, permitted edits, and required evidence."
+          },
+          {
+            "label": "Implement and expose the evidence",
+            "description": "A fresh coding session changes the target project, runs tests, and records a commit with the outputs needed for review."
+          },
+          {
+            "label": "Judge the result and the verification",
+            "description": "The reviewer directly inspects code, tests, and artifacts against acceptance criteria. It can request further checks or send a repair instruction."
+          },
+          {
+            "label": "Record acceptance or pause",
+            "description": "Python validates the structured decision and evidence identity before recording an authorized acceptance. Unresolved evidence or decisions requiring human judgment pause the workflow."
+          }
+        ]
+      },
+      {
+        "id": "architecture",
+        "title": "Carry accepted state across sessions.",
+        "navLabel": "State & recovery",
+        "paragraphs": [
+          "I keep task requirements and current progress in repository records, with checkpoints for execution and recovery. New sessions can reconstruct the task from those records and the actual project."
+        ],
+        "points": [
+          {
+            "title": "Bind the decision to the reviewed artifact",
+            "body": "I check branches, commit ancestry, permitted paths, project-rule hashes, and evidence SHA-256 values before a state update. These checks connect the review decision to a specific version of the work."
+          },
+          {
+            "title": "Recover with explicit uncertainty handling",
+            "body": "Checkpoints retain agent-turn identity, review context, and state updates. Resume checks reconcile interrupted work and avoid repeating completed turns. Unexplained drift stops for human review."
+          }
+        ]
+      },
+      {
+        "id": "practice",
+        "title": "Run the review cycle on a real project.",
+        "navLabel": "In practice",
+        "paragraphs": [
+          "A multilingual classroom-transcription task ran through three review cycles, seven agent turns, and two project commits. Independent review and human checks included live Japanese and French transcription.",
+          "I also built a read-only terminal dashboard that shows the task verdict, progress update, and publication of supporting records separately. It makes the current result and any decision awaiting a human visible."
+        ]
+      }
+    ],
     highlights: [
-      { title: "Separate coding from approval", body: "I retain the independent review agent's session while starting each coding turn fresh. The coding agent receives the current instruction; only the review agent can approve the result." },
-      { title: "Check the files behind the decision", body: "I validate structured responses, branches, commit ancestry, project-rule hashes, permitted file paths, and SHA-256 hashes before an explicitly authorized progress update." },
+      { title: "Separate generation from acceptance", body: "I give implementation and acceptance different roles. Fresh coding sessions produce changes and tests; a persistent review session inspects the artifacts against acceptance criteria and can request further checks." },
+      { title: "Bind acceptance to the reviewed artifact", body: "I validate structured responses, branches, commit ancestry, project-rule hashes, permitted file paths, and SHA-256 hashes before an explicitly authorized progress update." },
       { title: "Resume without repeating completed work", body: "I added safely written checkpoints and checks for interrupted updates. The same review session can correct at most two mechanical reporting errors without rerunning completed coding work." },
       { title: "Show what actually succeeded", body: "I built a progress log, command-line tools, and a read-only terminal dashboard that separately show task outcome, progress-record updates, and publication of the supporting records." },
     ],
@@ -108,7 +232,7 @@ export const projects: Project[] = [
       { label: "Load the current task", description: "Read the project rules, current progress, repository identity, and checks for outdated inputs." },
       { label: "Independent review agent", description: "Define the current step, permitted edits, and required supporting results." },
       { label: "Coding agent", description: "Implement and test in a separate project repository, then create a normal commit without rewriting history." },
-      { label: "Review and save progress", description: "Inspect the actual results, then update once, request a repair, or stop for human approval." },
+      { label: "Review and record acceptance", description: "Judge the evidence against acceptance criteria, validate artifact identity, then record an authorized result, request a repair, or pause for human judgment." },
     ],
     metrics: [
       { value: "3 cycles", label: "Real project task", scope: "Multilingual transcriber task spanning 7 agent turns and 2 project commits." },

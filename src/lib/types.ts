@@ -16,6 +16,15 @@ export interface EvidenceItem {
   href?: string;
 }
 
+export interface ProjectNarrativeSection {
+  id: string;
+  title: string;
+  navLabel: string;
+  paragraphs: string[];
+  points?: { title: string; body: string }[];
+  steps?: { label: string; description: string }[];
+}
+
 export interface Project {
   id: ProjectId;
   number: string;
@@ -32,6 +41,7 @@ export interface Project {
   image?: string;
   question: string;
   approach: string;
+  narrative?: ProjectNarrativeSection[];
   highlights: { title: string; body: string }[];
   architecture: { label: string; description: string }[];
   metrics: { value: string; label: string; scope: string }[];

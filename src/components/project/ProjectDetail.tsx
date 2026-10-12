@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { ProjectDetailProps } from "../../lib/types";
 import { categoryLabel, evidenceKindLabel, localePath } from "../../lib/i18n";
 import styles from "./ProjectDetail.module.css";
+import ProjectNarrative from "./ProjectNarrative";
 
 const labels = {
   en: {
@@ -82,12 +83,21 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
       </div>
 
       <nav className={styles.sectionNav} aria-label={text.pageNav}>
-        <a href="#approach">{text.approach}</a>
+        {project.narrative ? project.narrative.map(section => (
+          <a key={section.id} href={`#${section.id}`}>{section.navLabel}</a>
+        )) : <><a href="#approach">{text.approach}</a>
         <a href="#contributions">{text.contributions}</a>
-        <a href="#architecture">{text.architecture}</a>
+        <a href="#architecture">{text.architecture}</a></>}
         <a href="#evidence">{text.evidence}</a>
       </nav>
 
+      {project.narrative ? <>
+        <ProjectNarrative sections={project.narrative} />
+        {project.tags.length > 0 && <div className={`${styles.tools} ${styles.narrativeTools}`}>
+          <h2 className={styles.smallHeading}>{text.tools}</h2>
+          <ul>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+        </div>}
+      </> : <>
       <section className={styles.questionSection} id="approach" aria-labelledby="approach-heading">
         <div className={styles.sectionLead}>
           <span className={styles.sectionNumber}>01</span>
@@ -142,9 +152,10 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
         </ol>
       </section>
 
+      </>}
       <section className={styles.section} id="evidence" aria-labelledby="evidence-heading">
         <div className={styles.sectionLead}>
-          <span className={styles.sectionNumber}>04</span>
+          <span className={styles.sectionNumber}>{String((project.narrative?.length ?? 3) + 1).padStart(2, "0")}</span>
           <h2 id="evidence-heading">{text.evidence}</h2>
         </div>
         {project.metrics.length > 0 && (

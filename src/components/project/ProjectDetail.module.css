@@ -44,6 +44,14 @@
 .smallHeading { margin: 0 0 13px; color: var(--faint); font-weight: 400; }
 .question { margin: 0; font-size: 22px; line-height: 1.5; letter-spacing: -.02em; text-wrap: pretty; }
 .body { color: var(--muted); margin: 0; line-height: 1.8; font-size: 16px; }
+.narrativeCopy { max-width: 850px; margin-bottom: 28px; }
+.narrativeCopy p { color: var(--muted); margin: 0 0 16px; line-height: 1.85; font-size: 16px; }
+.narrativeCopy p:last-child { margin-bottom: 0; }
+.narrativePoints { list-style: none; padding: 0; margin: 0; display: grid; gap: 24px; }
+.narrativePoints li { display: grid; grid-template-columns: minmax(180px, .65fr) minmax(0, 1.35fr); gap: 24px; border-top: 1px solid var(--line); padding-top: 24px; }
+.narrativePoints h3 { margin: 0; font-size: 18px; font-weight: 500; line-height: 1.5; }
+.narrativePoints p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.85; }
+.tools.narrativeTools { padding-left: 0; margin-top: 32px; }
 .contributions { list-style: none; padding: 0; margin: 0; }
 .contributions li { display: grid; grid-template-columns: 46px minmax(180px, .75fr) minmax(0, 1.5fr); align-items: baseline; gap: 0 20px; padding: 25px 0; border-top: 1px solid var(--line); }
 .contributions li:last-child { border-bottom: 1px solid var(--line); }
@@ -130,6 +138,7 @@
   .sectionLead { gap: 12px; margin-bottom: 24px; }
   .sectionNumber { flex-basis: 20px; }
   .questionGrid { grid-template-columns: 1fr; gap: 28px; }
+  .narrativePoints li { grid-template-columns: 1fr; gap: 10px; }
   .question { font-size: 21px; }
   .contributions li { grid-template-columns: 20px minmax(0, 1fr); column-gap: 12px; padding-block: 22px; }
   .contributions h3 { font-size: 17px; }
