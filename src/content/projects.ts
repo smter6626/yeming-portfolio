@@ -176,7 +176,7 @@ export const projects: Project[] = [
     title: "AudioShifter",
     shortTitle: "AudioShifter",
     subtitle: "Pitch and tempo tools for music learners",
-    summary: "I re-engineered a desktop audio tool into a self-contained Apple Silicon app with independent pitch and tempo controls, cancellation, and source-file protection.",
+    summary: "I developed a desktop audio tool for music practice with independent pitch and tempo controls, cancellation, and source-file protection, packaged as a standalone Apple Silicon app.",
     category: "Desktop software",
     role: "Application, testing, and release engineering",
     timeframe: "March 2025 - August 2026",
@@ -185,7 +185,7 @@ export const projects: Project[] = [
     image: "/images/audioshifter.png",
     tags: ["Python", "Tkinter", "FFmpeg", "Rubber Band", "pytest", "PyInstaller"],
     question: "How can non-technical music learners adjust pitch and speed independently while keeping their original audio safe?",
-    approach: "I rebuilt an earlier Windows prototype as a modular local macOS application. The UI and controller are separate from validation, file handling, external tools, and the processing pipeline. FFmpeg/FFprobe and Rubber Band perform the audio processing, with formant preservation and predictable output behavior.",
+    approach: "I designed a modular local macOS application, separating the UI and controller from validation, file handling, external tools, and the processing pipeline. FFmpeg/FFprobe and Rubber Band perform the audio processing, with formant preservation and predictable output behavior.",
     highlights: [
       { title: "Independent learning controls", body: "I implemented independently configurable pitch changes from -24 to +24 semitones and speed changes from -95% to +400%, with MP3, M4A, WAV, and FLAC inputs." },
       { title: "Cancellation with cleanup", body: "I added background processing, child-process-group cleanup, exclusive non-overwriting output creation, source-file protection, and partial-file removal on failures or cancellation." },
