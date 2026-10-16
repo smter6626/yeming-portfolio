@@ -82,31 +82,35 @@ export const projects: Project[] = [
     title: "Independent Review and Acceptance for Long-Running AI Work",
     shortTitle: "AI review method",
     subtitle: "Independent review, evidence, and accountable decisions",
-    summary: "I designed a method for making AI work inspectable: separate generation from acceptance, review actual artifacts, and preserve the evidence behind current decisions.",
+    summary: "I developed an AI workflow method from project progress tracking: separate stable requirements from current state, make work transferable across sessions, and review the actual artifacts independently.",
     category: "Agent systems",
     role: "Methodology author",
     timeframe: "v1.2 published August 2026",
     status: "Published technical note in English and Chinese",
     color: "#d9ed92",
     tags: ["Project rules", "Progress tracking", "Independent review", "Git"],
-    question: "How can we challenge an agent's self-checks and keep an overturned acceptance from guiding later work?",
+    question: "When a long-running AI project keeps its goal but repeatedly changes course, how can its context survive handoff and its earlier results remain open to review?",
     approach: "I separate generation from acceptance and keep task requirements, accepted state, and decision history in repository documents. An independent reviewer inspects the actual artifacts, forms its own judgment, and challenges whether the chosen checks are sufficient. Review depth follows task risk; decisions about intent, sensitive facts, or irreversible actions return to the human owner. New evidence can invalidate an earlier acceptance, with that change recorded explicitly so later sessions use the current conclusion.",
     narrative: [
       {
         "id": "approach",
-        "title": "A self-check passed. The artifact still had a defect.",
-        "navLabel": "The trust problem",
+        "title": "The goal stayed stable. The plan kept changing.",
+        "navLabel": "How it developed",
         "paragraphs": [
-          "AI can produce more work than a person can inspect line by line. My starting point was a concrete acceptance problem: an agent passed its own checks, but independent inspection found a defect in the same artifact. Once an approval is recorded, later sessions can inherit it as fact."
+          "This method grew through repeated adjustments on long-running projects. I initially needed a way to recover my place across several projects, so one plan file held both completed work and future steps. Over time, it described the past more reliably than the future: execution kept encountering new obstacles while the overall direction and final goal often stayed the same."
         ],
-        "points": [
+        "steps": [
           {
-            "title": "Self-checks can share the implementation's blind spots",
-            "body": "An agent can run tests honestly and still choose a verification path that misses the defect. Acceptance requires judgment about whether those checks actually challenge the result."
+            "label": "Start with one project plan",
+            "description": "Past progress and future steps lived together so work could resume later. As the route changed, obsolete implementation plans became mixed with goals and constraints that still applied."
           },
           {
-            "title": "An old approval can become a new assumption",
-            "body": "Later sessions can inherit a polished artifact or an earlier approval as established fact. Long-running work needs an explicit record of which conclusions remain valid and which have been overturned."
+            "label": "Separate information by how it changes",
+            "description": "One record holds relatively stable background, constraints, the final goal, and environment. Another holds current state, small-step results, and blockers of different severity. Implementation can change course while keeping the same governing goal."
+          },
+          {
+            "label": "Use the records for handoff and review",
+            "description": "The two records and repository code gave a new LLM session a way to reconstruct the task and continue implementation or verification. In my Classroom Live Transcriber project, I then let AI take on more work and used other agents to cross-check it from the same records and code."
           }
         ]
       },
@@ -115,7 +119,8 @@ export const projects: Project[] = [
         "title": "Make acceptance inspectable and accountable.",
         "navLabel": "The method",
         "paragraphs": [
-          "I separate implementation from acceptance, and organize repository records by their responsibilities, update frequency, and editing authority. The method connects each accepted result to evidence a reviewer can inspect."
+          "Externalizing context made handoff possible, but raised another question: what should a new session rely on when accepting earlier work? The transcriber was a personal project where I could tolerate rework, so I deliberately explored how much AI could take over. A running app and the implementing agent's report still left me with questions about correctness.",
+          "I began separating implementation from acceptance, then made explicit what information stays stable, who can change it, and what evidence can revise the current conclusion."
         ],
         "points": [
           {
@@ -123,8 +128,8 @@ export const projects: Project[] = [
             "body": "A reviewer examines the actual artifacts, reaches its own acceptance decision, and judges whether the verification is sufficient. It can request another test or extraction path when the existing checks leave the claim unresolved."
           },
           {
-            "title": "Requirements and accepted state have different owners",
-            "body": "Stable requirements preserve the owner's intent and constraints. Current state records accepted work, open issues, and supporting evidence. An implementation step receives a bounded objective and permitted changes."
+            "title": "Stable requirements and current state have different jobs",
+            "body": "Background, goals, and boundaries can remain valid while execution routes, step results, and blockers change with evidence. Keeping them separate gives new sessions a recorded basis for continuing work while preserving unresolved issues."
           },
           {
             "title": "New evidence can overturn an earlier acceptance",
@@ -134,10 +139,10 @@ export const projects: Project[] = [
       },
       {
         "id": "architecture",
-        "title": "Cases that shaped the method.",
+        "title": "How cross-checking changed acceptance.",
         "navLabel": "Practical cases",
         "paragraphs": [
-          "The method developed through real artifact production and release work. These cases shaped both the definition of independent review and how much process a task needs."
+          "Cross-checking let verification pass to another session. Later artifact reviews sharpened the design: a reviewer needs direct access to results, its own acceptance judgment, and a judgment about whether the chosen verification is sufficient."
         ],
         "points": [
           {
@@ -152,10 +157,22 @@ export const projects: Project[] = [
       }
     ],
     highlights: [
-      { title: "Rules and progress stay separate", body: "I separated stable project requirements from current progress and decision history. Each task has one current step, and closed task records are preserved rather than overwritten by new work." },
-      { title: "Review the work directly", body: "I defined independent review around direct access to artifacts, an independent acceptance decision, and judgment about whether the verification itself is sufficient. A reviewer can challenge the chosen tests and require another verification path." },
-      { title: "Replaced decisions stay replaced", body: "I specified how new evidence overturns an earlier accepted result while preserving its history, so a later session cannot silently reuse an outdated approval." },
-      { title: "Match the process to the risk", body: "I documented job-application preparation and an AudioShifter release to show how the amount of review and recordkeeping can reflect each task's risk." },
+      {
+        "title": "Separate information by its responsibility",
+        "body": "I started with one project plan and found that stable goals and changing implementation routes needed different records. I separated background, constraints, and objectives from current state, step results, and blockers so a new agent session could resume from those records and repository code."
+      },
+      {
+        "title": "Review the work directly",
+        "body": "I defined independent review around direct access to artifacts, an independent acceptance decision, and judgment about whether the verification itself is sufficient. A reviewer can challenge the chosen tests and require another verification path."
+      },
+      {
+        "title": "Replaced decisions stay replaced",
+        "body": "I specified how new evidence overturns an earlier accepted result while preserving its history, so a later session cannot silently reuse an outdated approval."
+      },
+      {
+        "title": "Match the process to the risk",
+        "body": "I documented job-application preparation and an AudioShifter release to show how the amount of review and recordkeeping can reflect each task's risk."
+      }
     ],
     architecture: [
       { label: "Project rules", description: "The goal, limits, editing permissions, confirmed inputs, and conditions for accepting the result." },
@@ -208,7 +225,11 @@ export const projects: Project[] = [
         "kind": "publication"
       }
     ],
-    related: ["1pcloop", "audioshifter"],
+    related: [
+      "1pcloop",
+      "transcriber",
+      "audioshifter"
+    ],
   },
   {
     id: "1pcloop",
@@ -453,7 +474,11 @@ export const projects: Project[] = [
       { label: "Application source", href: "https://github.com/smter6626/live_subtitle_generator", kind: "source" },
       { label: "Download release 1.1.0", href: "https://github.com/smter6626/live_subtitle_generator/releases/tag/1.1.0", kind: "release" },
     ],
-    related: ["1pcloop", "audioshifter"],
+    related: [
+      "governance",
+      "1pcloop",
+      "audioshifter"
+    ],
   },
   {
     id: "audioshifter",

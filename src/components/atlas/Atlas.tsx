@@ -8,15 +8,15 @@ import styles from "./Atlas.module.css";
 const labels = {
   en: {
     title: "Explore all five works",
-    description: "Explore research, AI workflows, and desktop software. Connections show how the workflow method informed the coding system and transcriber development.",
+    description: "Explore research, AI workflows, and desktop software. The transcriber was a setting for the method to develop; the method later informed a coding workflow used on that project.",
     select: "Select a work to preview", preview: "Preview this work.", selected: "Selected", explore: "Explore",
-    relation: "Method -> Coding workflow -> Transcriber", hint: "Select a node",
+    relation: "Method / Coding workflow / Transcriber", hint: "Select a node",
   },
   zh: {
     title: "探索全部五个项目",
-    description: "探索科研、AI 工作流与桌面软件。连线展示工作流方法、编程系统和课堂转写开发之间的联系。",
+    description: "探索科研、AI 工作流与桌面软件。课堂转写器是方法演化的实践项目，方法后来又用于编程流程，并在转写器开发中应用。",
     select: "选择要预览的项目", preview: "预览此项目。", selected: "已选中", explore: "探索",
-    relation: "方法 -> 编程流程 -> 课堂转写", hint: "选择一个节点",
+    relation: "方法 / 编程流程 / 转写实践", hint: "选择一个节点",
   },
 };
 
