@@ -71,6 +71,9 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
                 return (
                   <path
                     key={id}
+                    data-connection-from={id}
+                    data-connection-to={relation[index + 1]}
+                    data-active-class={styles.activeConnection}
                     className={linked ? styles.activeConnection : undefined}
                     d={`M${from.x} ${from.y} L${to.x} ${to.y}`}
                   />
@@ -85,13 +88,14 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
             </g>
             <circle
               className={styles.selectedOrbit}
+              data-selection-orbit
               cx={selected.x}
               cy={selected.y}
               r="108"
             />
           </svg>
 
-          <div className={styles.nodes} role="group" aria-label={text.select}>
+          <div className={styles.nodes} role="group" aria-label={text.select} data-atlas-nodes data-selected-class={styles.selected} data-selected-label={text.selected} data-explore-label={text.explore}>
             {projects.map((project) => {
               const point = coordinates[project.id];
               const isSelected = project.id === selectedId;
@@ -108,6 +112,8 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
                   style={nodeStyle}
                   className={`${styles.node} ${isSelected ? styles.selected : ""} ${relation.includes(project.id) ? styles.relatedNode : ""}`}
                   data-project={project.id}
+                  data-x={point.x}
+                  data-y={point.y}
                   aria-pressed={isSelected}
                   aria-label={`${project.title}, ${categoryLabel(project.category, locale)}. ${text.preview}`}
                   onClick={() => onSelect(project.id)}
@@ -115,7 +121,7 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
                   <span className={styles.nodeTop}>
                     <span className={styles.number}>{project.number}</span>
                     <span className={styles.indicator} aria-hidden="true" />
-                    <span className={styles.selectedLabel}>{isSelected ? text.selected : text.explore}</span>
+                    <span className={styles.selectedLabel} data-selection-label>{isSelected ? text.selected : text.explore}</span>
                   </span>
                   <span className={styles.nodeTitle}>{project.shortTitle}</span>
                   <span className={styles.category}>{categoryLabel(project.category, locale)}</span>
