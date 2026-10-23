@@ -139,7 +139,7 @@ def main():
     # A filtered row's display:grid must not override the HTML hidden attribute.
     css += "\n[hidden]{display:none!important}#offline-view{display:contents}#offline-view main:focus{outline:none}\n"
     css = re.sub(r"</style", r"<\/style", css, flags=re.IGNORECASE)
-    default_route = "/zh/" if "/zh/" in routes else "/"
+    default_route = "/"
     default = metadata[default_route]
     payload = json.dumps({"pages": metadata, "assets": assets, "defaultRoute": default_route}, ensure_ascii=False).replace("<", "\\u003c")
     templates = "\n".join(f'<template data-route="{html.escape(route, quote=True)}">{body}</template>' for route, body in bodies.items())
