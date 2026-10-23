@@ -7,6 +7,7 @@
     "build": "next build",
     "postbuild": "python3 scripts/export_offline.py",
     "export:offline": "python3 scripts/export_offline.py",
+    "deploy:pages": "python3 scripts/deploy_pages.py",
     "typecheck": "tsc --noEmit",
     "preview": "python3 -m http.server 3001 --bind 0.0.0.0 --directory out"
   },

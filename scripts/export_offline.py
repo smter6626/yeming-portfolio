@@ -13,6 +13,8 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out"
+MANIFEST = ROOT / ".next/routes-manifest.json"
+BASE_PATH = json.loads(MANIFEST.read_text()).get("basePath", "") if MANIFEST.is_file() else ""
 DESTINATION = ROOT / "Yeming-Portfolio.html"
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 OMIT_TAGS = {"script", "noscript", "link", "meta", "style"}
@@ -63,8 +65,14 @@ class Document(HTMLParser):
         self.stack[-1].children.append(data)
 
 
+def unprefix(path):
+    if BASE_PATH and (path == BASE_PATH or path.startswith(BASE_PATH + "/")):
+        return path[len(BASE_PATH):] or "/"
+    return path
+
+
 def local_asset(url, relative_to=OUT):
-    path = urlsplit(url).path
+    path = unprefix(urlsplit(url).path)
     candidate = (OUT / path.lstrip("/")) if path.startswith("/") else relative_to / path
     candidate = candidate.resolve()
     if not candidate.is_relative_to(OUT) or not candidate.is_file():
@@ -86,7 +94,7 @@ def serialize(node, route, routes, assets):
     if node.tag == "a" and attrs.get("href"):
         url = urlsplit(attrs["href"])
         if not url.scheme and not url.netloc:
-            path = url.path or route
+            path = unprefix(url.path) or route
             if path not in routes:
                 raise ValueError(f"Unknown local page in {route}: {attrs['href']}")
             attrs["href"] = "#" + path + ("?" + url.query if url.query else "") + ("#" + url.fragment if url.fragment else "")

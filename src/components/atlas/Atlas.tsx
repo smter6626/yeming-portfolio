@@ -3,6 +3,7 @@
 import { useId, type CSSProperties } from "react";
 import type { AtlasProps, ProjectId } from "../../lib/types";
 import { categoryLabel, localePath } from "../../lib/i18n";
+import { sitePath } from "../../lib/site-path";
 import styles from "./Atlas.module.css";
 
 const labels = {
@@ -108,7 +109,7 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
               return (
                 <a
                   key={project.id}
-                  href={localePath(locale, `/work/${project.id}/`)}
+                  href={sitePath(localePath(locale, `/work/${project.id}/`))}
                   style={nodeStyle}
                   className={`${styles.node} ${isSelected ? styles.selected : ""} ${relation.includes(project.id) ? styles.relatedNode : ""}`}
                   data-project={project.id}

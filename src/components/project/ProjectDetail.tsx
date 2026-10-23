@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { ProjectDetailProps, ProjectId } from "../../lib/types";
 import { categoryLabel, evidenceKindLabel, localePath } from "../../lib/i18n";
+import { sitePath } from "../../lib/site-path";
 import styles from "./ProjectDetail.module.css";
 import ProjectNarrative from "./ProjectNarrative";
 
@@ -56,7 +57,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
   return (
     <article className={styles.project} style={projectStyle} aria-labelledby="project-title">
       <div className={styles.topline}>
-        <a className={styles.backLink} href={localePath(locale, "/#work")}>&lt;- {text.allWork}</a>
+        <a className={styles.backLink} href={sitePath(localePath(locale, "/#work"))}>&lt;- {text.allWork}</a>
         <span className={styles.projectIndex}>{text.work} / {project.number}</span>
       </div>
 
@@ -68,7 +69,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
         </div>
         {project.image && (
           <div className={styles.projectArtwork}>
-            <img src={project.image} alt="" width={112} height={112} />
+            <img src={sitePath(project.image)} alt="" width={112} height={112} />
           </div>
         )}
       </header>
@@ -214,7 +215,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
           <h2 id="related-heading">{text.related}</h2>
           <nav className={styles.relatedLinks} aria-label={text.relatedNav}>
             {relatedProjects.map((related) => (
-              <a key={related.id} href={localePath(locale, `/work/${related.id}/`)}>
+              <a key={related.id} href={sitePath(localePath(locale, `/work/${related.id}/`))}>
                 <span className={styles.relatedCategory}>{categoryLabel(related.category, locale)} / {related.number}</span>
                 <span className={styles.relatedTitle}>{related.shortTitle}<span aria-hidden="true">-&gt;</span></span>
                 <span className={styles.relatedSubtitle}>{related.subtitle}</span>

@@ -23,6 +23,29 @@ npm run preview
 
 The build exports static files to `out/`. Preview runs at [localhost:3001](http://localhost:3001). The resume page supports browser printing and saving as PDF.
 
+## Public website
+
+The portfolio is hosted at [smter6626.github.io/yeming-portfolio](https://smter6626.github.io/yeming-portfolio/), with [Chinese pages](https://smter6626.github.io/yeming-portfolio/zh/).
+
+GitHub Pages serves the root of the dedicated `gh-pages` branch. With Node.js, Python 3.9+, Git, and an authenticated GitHub CLI installed, publish an update from a clean, committed source checkout:
+
+```bash
+git push origin main
+npm run deploy:pages
+```
+
+The deployment script builds the current source and publishes only `out/` to `gh-pages` using a temporary checkout. GitHub then processes the website update. The source commit is recorded in each publication commit; local handoff files and the single-file offline copy are excluded.
+
+Local builds use the domain root. The deployment script reads the site's path from GitHub Pages and sets `NEXT_PUBLIC_BASE_PATH` during the build so navigation, language switching, and assets work under `/yeming-portfolio/`. To reproduce that build locally:
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/yeming-portfolio npm run build
+```
+
+Serve that export under `/yeming-portfolio/`. For the normal local preview, rebuild with `npm run build` without the variable. The generated single-file HTML works independently of either hosting path.
+
+When adding plain internal anchors, browser navigation, or asset URLs, use `sitePath` from `src/lib/site-path.ts`; Next.js `Link` prefixes its route automatically. A custom domain can be configured later in GitHub Pages, followed by another deployment to rebuild for its new path.
+
 ## Open without a server
 
 Every `npm run build` also creates `Yeming-Portfolio.html` in the project root. Double-click that file to browse the complete portfolio, starting in English. It includes both languages, project pages, styles, and icons, so it can be copied elsewhere and opened without Node.js, Python, or a network connection.
