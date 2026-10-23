@@ -17,6 +17,11 @@ export const projectsZh: Project[] = [
     tags: ["概率电路", "最优传输", "PyTorch", "CUDA", "Slurm"],
     question: "已经训练的概率电路遇到数据分布变化时，能否在不使用原始训练数据、不从头训练的情况下提高稳健性？",
     approach: "PeTeR 通过训练后稳健化研究这个问题。作为共同作者，我参与实验执行、结果验证、工程支持和补充实验材料准备。在后续工作中，我执行超参数扫描与 GPU 学习实验，核对结果覆盖，并保留失败记录用于数值稳定性分析。",
+    resumeHighlights: [
+      "共同署名的 PeTeR 获 UAI 2026 可处理概率建模研讨会接收，参与实验执行、结果验证和补充实验材料准备。",
+      "审计后续研究的 3,360 个扫描配置，保留预期的高学习率数值失败；另开展覆盖 28 个数据集的学习实验。",
+      "依据预热与显存观测选择并发配置，K=3 使用 L40S，显存需求更高的 K=5 使用 A100 80GB。"
+    ],
     highlights: [
       {
         "title": "PeTeR 与可检查的实验材料",
@@ -152,6 +157,10 @@ export const projectsZh: Project[] = [
           }
         ]
       }
+    ],
+    resumeHighlights: [
+      "从长期项目发展出仓库原生工作方法，分离稳定约束、当前状态与决策历史，支持跨会话交接。",
+      "定义独立产物审查与旧验收结论失效规则，在中英文 v1.2 文档中记录 PDF 验证与 AudioShifter 发布案例。"
     ],
     highlights: [
       {
@@ -331,6 +340,10 @@ export const projectsZh: Project[] = [
         "points": []
       }
     ],
+    resumeHighlights: [
+      "以 Python 调度独立的编程与审查智能体，实现结构化结论、提交与证据身份检查、检查点和人工决定节点。",
+      "应用于课堂转写器的多语言开发，并实现终端观察界面、进度与证据记录的独立恢复。"
+    ],
     highlights: [
       {
         "title": "分离生成与验收职责",
@@ -409,6 +422,10 @@ export const projectsZh: Project[] = [
     tags: ["Python", "PySide6", "whisper.cpp", "Metal", "流式音频", "PyInstaller"],
     question: "学生怎样使用设备本地转写跟上课堂讲授，而不依赖云端转写服务或事先配置的开发环境？",
     approach: "应用通过 whisper.cpp 与 Metal 在本机运行 Whisper。重叠音频片段保持连续采集，也可能在片段边界产生重复文本。我先保存原始输出，再谨慎清理重复，并将两个版本与会话日志、配置一同保存。采集和推理通过异步工作线程运行，使界面保持响应。",
+    resumeHighlights: [
+      "实现本地 whisper.cpp/Metal 转写与异步采集、推理，保存原始及清理后的文本、会话日志与配置。",
+      "加入 SHA-256 模型完整性检查与模型管理，打包 Apple Silicon 应用并发布 1.1.0。"
+    ],
     highlights: [
       {
         "title": "本地音频处理管线",
@@ -478,6 +495,10 @@ export const projectsZh: Project[] = [
     tags: ["Python", "Tkinter", "FFmpeg", "Rubber Band", "pytest", "PyInstaller"],
     question: "不熟悉技术的音乐学习者，怎样分别调整音高与速度，同时保证原始音频不被改动？",
     approach: "FFmpeg/FFprobe 与 Rubber Band 负责音频检查、变调和变速。我让处理在后台运行，并把取消、文件名冲突与残缺输出作为应用需要处理的正常分支。源文件保持不变，输出文件通过独占创建避免覆盖已有文件。",
+    resumeHighlights: [
+      "实现独立变调、变速、后台处理、取消清理及不覆盖已有文件的输出处理。",
+      "将工作流方法用于 alpha.3 发布工程，完成 165 项测试、内置依赖检查、源码与校验和记录，以及另一台 Mac 的验收。"
+    ],
     highlights: [
       { title: "分别调整调性与练习速度", body: "我实现 -24 至 +24 半音的变调和 -95% 至 +400% 的变速，两项参数可独立设置，支持 MP3、M4A、WAV 和 FLAC 输入。" },
       { title: "取消后完成清理", body: "我加入后台处理、子进程组清理、不覆盖现有文件的独占输出创建、源文件保护，以及失败或取消时的残缺文件删除。" },

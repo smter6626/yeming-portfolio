@@ -16,6 +16,11 @@ export const projects: Project[] = [
     tags: ["Probabilistic circuits", "Optimal transport", "PyTorch", "CUDA", "Slurm"],
     question: "Can a trained probabilistic circuit become more robust to distribution shift without its original training data or retraining from scratch?",
     approach: "PeTeR addresses this question through post-training robustification. As a co-author, I contributed experiment execution, result validation, engineering support, and supplementary experiment materials. In subsequent work, I ran a hyperparameter sweep and GPU learning experiments, auditing result coverage and retaining failures for numerical-stability analysis.",
+    resumeHighlights: [
+      "Co-authored PeTeR, accepted at the UAI 2026 Workshop on Tractable Probabilistic Modeling; contributed experiments, result validation, and supplementary experiment materials.",
+      "Audited 3,360 follow-up sweep configurations, retaining expected high-learning-rate failures; ran separate learning experiments across 28 datasets.",
+      "Selected GPU concurrency from warmup and memory measurements, using L40S for K=3 and A100 80GB for higher-memory K=5 workloads."
+    ],
     highlights: [
       {
         "title": "PeTeR and reproducible experiment materials",
@@ -155,6 +160,10 @@ export const projects: Project[] = [
           }
         ]
       }
+    ],
+    resumeHighlights: [
+      "Developed a repository-native method from long-running projects: separate stable requirements, current state, and decision history for cross-session handoff.",
+      "Defined independent artifact review and explicit invalidation of earlier acceptance; documented PDF verification and AudioShifter release cases in a bilingual v1.2 technical note."
     ],
     highlights: [
       {
@@ -337,6 +346,10 @@ export const projects: Project[] = [
         "points": []
       }
     ],
+    resumeHighlights: [
+      "Implemented Python orchestration for separate coding and review agents, with structured verdicts, commit/evidence identity checks, checkpoints, and human decisions.",
+      "Applied the workflow to multilingual transcriber development; added a terminal dashboard and independent recovery of progress/evidence records."
+    ],
     highlights: [
       {
         "title": "Separate generation from acceptance",
@@ -420,6 +433,10 @@ export const projects: Project[] = [
     tags: ["Python", "PySide6", "whisper.cpp", "Metal", "Audio streaming", "PyInstaller"],
     question: "How can students follow live lectures using on-device transcription without a cloud transcription service or a preconfigured development environment?",
     approach: "The app runs Whisper locally through whisper.cpp and Metal. Overlapping audio chunks keep capture continuous, but can repeat words at chunk boundaries. I preserve the original output before applying conservative cleanup, then save both versions with the session log and configuration. Capture and inference run in asynchronous workers so the UI can remain responsive.",
+    resumeHighlights: [
+      "Built local whisper.cpp/Metal transcription with asynchronous capture and inference; retained original and cleaned transcripts with session logs and configuration.",
+      "Added SHA-256-verified model management and packaged an Apple Silicon app; published release 1.1.0."
+    ],
     highlights: [
       {
         "title": "A local audio pipeline",
@@ -496,6 +513,10 @@ export const projects: Project[] = [
     tags: ["Python", "Tkinter", "FFmpeg", "Rubber Band", "pytest", "PyInstaller"],
     question: "How can non-technical music learners adjust pitch and speed independently while keeping their original audio safe?",
     approach: "FFmpeg/FFprobe and Rubber Band handle audio inspection, pitch, and tempo processing. I run that work in the background and treat cancellation, filename conflicts, and partial outputs as normal paths the app must handle. Source files stay unchanged, and output creation is exclusive to avoid overwriting an existing file.",
+    resumeHighlights: [
+      "Built independent pitch and tempo controls with background processing, cancellation cleanup, and non-overwriting output handling.",
+      "Applied the workflow method to alpha.3 release engineering: 165 passing tests, bundled-dependency checks, source/checksum records, and acceptance on a separate Mac."
+    ],
     highlights: [
       { title: "Independent learning controls", body: "I implemented independently configurable pitch changes from -24 to +24 semitones and speed changes from -95% to +400%, with MP3, M4A, WAV, and FLAC inputs." },
       { title: "Cancellation with cleanup", body: "I added background processing, child-process-group cleanup, exclusive non-overwriting output creation, source-file protection, and partial-file removal on failures or cancellation." },

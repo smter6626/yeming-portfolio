@@ -4,6 +4,6 @@
 .selectionCopy { min-width: 0; }
 .selectionCopy h2 { font-size: 20px; letter-spacing: -.025em; font-weight: 500; margin: 6px 0; }
 .selectionCopy p { color: var(--muted); font-size: 12px; line-height: 1.75; max-width: 480px; }
-.open { border: 1px solid var(--line); min-width: 44px; min-height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--accent); text-decoration: none; font-size: 22px; }
+.open { border: 1px solid var(--line); min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; flex-shrink: 0; padding: 8px 14px; border-radius: 6px; color: var(--accent); text-decoration: none; font-size: 12px; }
 .open:hover { background: var(--surface-raised); border-color: var(--accent); }
 @media (max-width: 520px) { .heading { padding: 16px; font-size: 9px; } .heading span:last-child { letter-spacing: 0; } .selection { padding: 18px 16px; align-items: start; } .selectionCopy p { font-size: 13px; } }

@@ -11,7 +11,7 @@
     "preview": "python3 -m http.server 3001 --bind 0.0.0.0 --directory out"
   },
   "dependencies": {
-    "next": "16.4.0",
+    "next": "16.4.2",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

@@ -43,6 +43,7 @@ export interface Project {
   approach: string;
   narrative?: ProjectNarrativeSection[];
   highlights: { title: string; body: string }[];
+  resumeHighlights?: string[];
   architecture: { label: string; description: string }[];
   metrics: { value: string; label: string; scope: string }[];
   evidence: EvidenceItem[];
@@ -59,7 +60,8 @@ export interface Profile {
   github: string;
   headline: string;
   introduction: string;
-  education: { institution: string; degree: string; period: string; detail?: string }[];
+  resumeSummary?: string;
+  education: { institution: string; degree: string; period: string; gpa?: string; detail?: string }[];
   skills: { label: string; items: string[] }[];
 }
 

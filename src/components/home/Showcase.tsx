@@ -16,7 +16,7 @@ export default function Showcase({ projects, locale }: { projects: readonly Proj
     <Atlas projects={projects} selectedId={selectedId} onSelect={setSelectedId} locale={locale} />
     <div className={styles.selection} aria-live="polite">
       <div className={styles.selectionCopy}><span className="eyebrow" data-preview-meta style={{ color: selected.color }}>{categoryLabel(selected.category, locale)} / {selected.status}</span><h2 data-preview-heading>{selected.shortTitle}</h2><p data-preview-summary>{selected.summary}</p></div>
-      <Link href={localePath(locale, `/work/${selected.id}/`)} data-preview-link className={styles.open} aria-label={locale === "zh" ? `了解${selected.title}` : `Explore ${selected.title}`}><ArrowIcon size={22} /></Link>
+      <Link href={localePath(locale, `/work/${selected.id}/`)} data-preview-link className={styles.open} aria-label={locale === "zh" ? `了解${selected.title}` : `Explore ${selected.title}`}><span>{locale === "zh" ? "阅读项目" : "Read project"}</span><ArrowIcon size={18} /></Link>
     </div>
   </div>;
 }

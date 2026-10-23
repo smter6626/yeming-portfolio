@@ -56,7 +56,7 @@ export default function ProjectDetail({ project, allProjects, locale }: ProjectD
   return (
     <article className={styles.project} style={projectStyle} aria-labelledby="project-title">
       <div className={styles.topline}>
-        <a className={styles.backLink} href={localePath(locale, "/")}>&lt;- {text.allWork}</a>
+        <a className={styles.backLink} href={localePath(locale, "/#work")}>&lt;- {text.allWork}</a>
         <span className={styles.projectIndex}>{text.work} / {project.number}</span>
       </div>
 

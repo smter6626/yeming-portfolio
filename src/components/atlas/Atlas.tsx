@@ -2,21 +2,21 @@
 
 import { useId, type CSSProperties } from "react";
 import type { AtlasProps, ProjectId } from "../../lib/types";
-import { categoryLabel } from "../../lib/i18n";
+import { categoryLabel, localePath } from "../../lib/i18n";
 import styles from "./Atlas.module.css";
 
 const labels = {
   en: {
     title: "Explore all five works",
     description: "Explore research, AI workflows, and desktop software. The transcriber was a setting for the method to develop; the method later informed a coding workflow used on that project.",
-    select: "Select a work to preview", preview: "Preview this work.", selected: "Selected", explore: "Explore",
-    relation: "Method / Coding workflow / Transcriber", hint: "Select a node",
+    select: "Project links", preview: "Open project.", selected: "Preview", explore: "Read",
+    relation: "Method / Coding workflow / Transcriber", hint: "Open a project",
   },
   zh: {
     title: "探索全部五个项目",
     description: "探索科研、AI 工作流与桌面软件。课堂转写器是方法演化的实践项目，方法后来又用于编程流程，并在转写器开发中应用。",
-    select: "选择要预览的项目", preview: "预览此项目。", selected: "已选中", explore: "探索",
-    relation: "方法 / 编程流程 / 转写实践", hint: "选择一个节点",
+    select: "项目链接", preview: "打开项目。", selected: "预览中", explore: "阅读",
+    relation: "方法 / 编程流程 / 转写实践", hint: "点击项目即可进入",
   },
 };
 
@@ -106,17 +106,18 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
               };
 
               return (
-                <button
+                <a
                   key={project.id}
-                  type="button"
+                  href={localePath(locale, `/work/${project.id}/`)}
                   style={nodeStyle}
                   className={`${styles.node} ${isSelected ? styles.selected : ""} ${relation.includes(project.id) ? styles.relatedNode : ""}`}
                   data-project={project.id}
                   data-x={point.x}
                   data-y={point.y}
-                  aria-pressed={isSelected}
+                  data-selected={isSelected}
                   aria-label={`${project.title}, ${categoryLabel(project.category, locale)}. ${text.preview}`}
-                  onClick={() => onSelect(project.id)}
+                  onFocus={() => onSelect(project.id)}
+                  onMouseEnter={() => onSelect(project.id)}
                 >
                   <span className={styles.nodeTop}>
                     <span className={styles.number}>{project.number}</span>
@@ -125,7 +126,7 @@ export default function Atlas({ projects, selectedId, onSelect, locale }: AtlasP
                   </span>
                   <span className={styles.nodeTitle}>{project.shortTitle}</span>
                   <span className={styles.category}>{categoryLabel(project.category, locale)}</span>
-                </button>
+                </a>
               );
             })}
           </div>

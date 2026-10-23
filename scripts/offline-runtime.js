@@ -75,7 +75,7 @@
     const row = Array.from(view.querySelectorAll("[data-work-index] [data-project-id]")).find(item => item.dataset.projectId === id);
     group.querySelectorAll("[data-project]").forEach(node => {
       const selected = node === button;
-      node.setAttribute("aria-pressed", String(selected));
+      node.dataset.selected = String(selected);
       node.classList.toggle(group.dataset.selectedClass, selected);
       node.querySelector("[data-selection-label]").textContent = selected ? group.dataset.selectedLabel : group.dataset.exploreLabel;
     });
@@ -105,8 +105,6 @@
       if (path !== route.path) navigate(path + route.search + route.anchor);
     } else if (button?.matches("[data-work-filter]")) {
       setFilter(button);
-    } else if (button?.matches("[data-project]")) {
-      selectProject(button);
     } else if (button?.classList.contains("print-button")) {
       window.print();
     }
@@ -118,6 +116,12 @@
       navigate(href.slice(1));
     }
   });
+
+  ["focusin", "mouseover"].forEach(type => view.addEventListener(type, event => {
+    if (!(event.target instanceof Element)) return;
+    const node = event.target.closest("[data-atlas-nodes] [data-project]");
+    if (node) selectProject(node);
+  }));
 
   window.addEventListener("hashchange", () => render());
   if (!window.location.hash) window.history.replaceState(null, "", `#${defaultRoute}`);

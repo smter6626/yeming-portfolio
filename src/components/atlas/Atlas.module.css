@@ -108,6 +108,7 @@
   color: var(--text);
   font: inherit;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition: border-color 160ms ease, background-color 160ms ease;
 }
