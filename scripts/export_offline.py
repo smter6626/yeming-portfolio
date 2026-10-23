@@ -95,9 +95,12 @@ def serialize(node, route, routes, assets):
         url = urlsplit(attrs["href"])
         if not url.scheme and not url.netloc:
             path = unprefix(url.path) or route
-            if path not in routes:
+            if path.lower().endswith(".pdf"):
+                attrs["href"] = data_url(local_asset(url.path))
+            elif path not in routes:
                 raise ValueError(f"Unknown local page in {route}: {attrs['href']}")
-            attrs["href"] = "#" + path + ("?" + url.query if url.query else "") + ("#" + url.fragment if url.fragment else "")
+            else:
+                attrs["href"] = "#" + path + ("?" + url.query if url.query else "") + ("#" + url.fragment if url.fragment else "")
     if node.tag == "img" and attrs.get("src"):
         source = attrs.pop("src")
         assets.setdefault(source, data_url(local_asset(source)))

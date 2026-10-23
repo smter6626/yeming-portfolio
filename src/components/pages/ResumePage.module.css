@@ -1,0 +1,6 @@
+.heading > div { min-width: 0; }
+.actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+.actions a { text-align: center; text-decoration: none; }
+.resources { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 8px; }
+@media (max-width: 700px) { .heading { flex-direction: column; } .actions { width: 100%; align-items: flex-start; } }
+@media print { .actions { display: none !important; } }
