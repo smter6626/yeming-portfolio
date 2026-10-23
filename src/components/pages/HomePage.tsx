@@ -2,7 +2,9 @@ import Link from "next/link";
 import Showcase from "@/components/home/Showcase";
 import WorkIndex from "@/components/home/WorkIndex";
 import { getProjects, getProfile } from "@/content/localized";
+import { resumeDownloadName, resumePdf } from "@/content/resume";
 import { localePath } from "@/lib/i18n";
+import { sitePath } from "@/lib/site-path";
 import type { Locale } from "@/lib/types";
 import styles from "./HomePage.module.css";
 
@@ -51,7 +53,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
         </Link>
         <div className="hero-actions">
           <a className="button-primary" href="#work">{zh ? "浏览作品" : "Explore my work"} <span aria-hidden="true">-&gt;</span></a>
-          <Link className="text-link" href={localePath(locale, "/resume/")}>{zh ? "查看简历" : "Read my resume"}</Link>
+          <a className="text-link" href={sitePath(resumePdf)} download={resumeDownloadName}>{zh ? "下载英文简历文件" : "Download my resume file"}</a>
         </div>
       </div>
       <div className={styles.strengths} aria-label={zh ? "研究、设计与工程实践" : "Research, design, and engineering"}>

@@ -1,6 +1,5 @@
-.heading > div { min-width: 0; }
-.actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
-.actions a { text-align: center; text-decoration: none; }
-.resources { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 8px; }
-@media (max-width: 700px) { .heading { flex-direction: column; } .actions { width: 100%; align-items: flex-start; } }
-@media print { .actions { display: none !important; } }
+.download { padding-top: 72px; padding-bottom: 96px; min-height: 60vh; }
+.download h1 { margin: 16px 0; font-size: clamp(2rem, 6vw, 3.5rem); }
+.download > p:not(:first-child) { color: var(--muted); margin-bottom: 28px; }
+.download > a { display: inline-flex; text-align: center; }
+@media (max-width: 700px) { .download { padding-top: 48px; padding-bottom: 64px; } }

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import ArrowIcon from "./ArrowIcon";
 import LanguageSwitch from "./LanguageSwitch";
+import { resumeDownloadName, resumePdf } from "@/content/resume";
 import { localePath } from "@/lib/i18n";
+import { sitePath } from "@/lib/site-path";
 import type { Locale } from "@/lib/types";
 
 export default function SiteHeader({ locale }: { locale: Locale }) {
@@ -11,7 +13,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <div className="header-tools"><nav className="site-nav" aria-label={locale === "zh" ? "主导航" : "Main navigation"}>
         <Link href={localePath(locale, "/#work")}>{locale === "zh" ? "作品" : "Work"}</Link>
         <Link className="nav-about" href={localePath(locale, "/#about")}>{locale === "zh" ? "关于我" : "About"}</Link>
-        <Link className="nav-resume" href={localePath(locale, "/resume/")}>{locale === "zh" ? "简历" : "Resume"} <ArrowIcon size={14} /></Link>
+        <a className="nav-resume" href={sitePath(resumePdf)} download={resumeDownloadName}>{locale === "zh" ? "下载简历" : "Download CV"} <ArrowIcon size={14} /></a>
       </nav><LanguageSwitch locale={locale} /></div>
     </div>
   </header>;

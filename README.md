@@ -1,6 +1,6 @@
 # Yeming Dai portfolio
 
-A bilingual personal portfolio covering machine learning research, AI workflows, and desktop software. Built with Next.js, React, and TypeScript, with a project atlas, five case studies, and a printable resume.
+A bilingual personal portfolio covering machine learning research, AI workflows, and desktop software. Built with Next.js, React, and TypeScript, with a project atlas, five case studies, and an English CV download.
 
 ## Local development
 
@@ -21,7 +21,9 @@ npm run build
 npm run preview
 ```
 
-The build exports static files to `out/`. Preview runs at [localhost:3001](http://localhost:3001). The resume page provides the two-page English CV PDF and also supports browser printing. The English web resume and its Chinese translation follow the October 23, 2026 CV; browser printing uses the web layout, not the fixed two-page PDF layout.
+The build exports static files to `out/`. Preview runs at [localhost:3001](http://localhost:3001). Both site languages download the same two-page English CV PDF. The existing resume routes are download entries only; there is no separately maintained web resume or translated CV.
+
+To update the CV, replace `public/cv/Yeming_Dai_CV_2026-10-23.pdf` with the exported English PDF, then rebuild and deploy. This is the only CV content file in the website; `src/content/resume.ts` only defines its download path and filename.
 
 ## Public website
 
@@ -50,7 +52,7 @@ When adding plain internal anchors, browser navigation, or asset URLs, use `site
 
 Every `npm run build` also creates `Yeming-Portfolio.html` in the project root. Double-click that file to browse the complete portfolio, starting in English. It includes both languages, project pages, styles, and icons, so it can be copied elsewhere and opened without Node.js, Python, or a network connection.
 
-Language switching, project filtering, the optional atlas, browser back/forward, section links, resume printing, and the embedded CV PDF download work within the file. Atlas nodes open project pages directly; focus or hover shows a preview. Links to external papers, GitHub, and application downloads require the network.
+Language switching, project filtering, the optional atlas, browser back/forward, section links, and the embedded English CV PDF download work within the file. Atlas nodes open project pages directly; focus or hover shows a preview. Links to external papers, GitHub, and application downloads require the network.
 
 The file is generated from the same static pages as the website. Rebuild after content changes to update it. Generated HTML is excluded from Git; the exporter and its small navigation script live in `scripts/`. To repackage an existing `out/` export, run `npm run export:offline`.
 
@@ -58,7 +60,7 @@ The file is generated from the same static pages as the website. Rebuild after c
 
 English pages use `/`, `/resume/`, and `/work/<id>/`. Chinese pages use `/zh/`, `/zh/resume/`, and `/zh/work/<id>/`. The language buttons open the corresponding page and retain its section anchor.
 
-- `src/content/`: project descriptions and profile in both languages; `resume.ts` holds the English CV text, Chinese translation, and CV resource links separately from the longer case studies.
+- `src/content/`: project descriptions and profile in both languages; `resume.ts` holds only the shared English CV download path and filename.
 - `src/components/`: project atlas, project pages, navigation, and resume views.
 - `src/app/`: localized routes, metadata, and shared styles.
 - `src/lib/`: content types and language helpers.
