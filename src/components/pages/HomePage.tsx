@@ -22,13 +22,13 @@ export default function HomePage({ locale }: { locale: Locale }) {
     { title: "Engineering practice", body: "Recoverable execution, local tools, and release checks.", link: "Explore the coding system", id: "1pcloop" },
   ];
   const evolution = zh ? [
-    { title: "单份计划的局限", body: "反复中断与恢复，让记忆和约束退化；历史、当前状态与不确定的未来步骤又混在一起。" },
-    { title: "拆分后继续改进", body: "按更新频率分开文档改善了接手，但未来计划仍依赖过去与当前，职责需要进一步明确。" },
+    { title: "单份计划的局限", body: "反复中断与恢复，使原有计划和约束容易被遗忘；历史、当前状态与不确定的未来步骤又混在一起。" },
+    { title: "拆分后继续改进", body: "按更新频率分开文档改善了接手，再进一步区分已验收结果、当前任务、未解决阻碍和条件性后续计划。" },
     { title: "研究任务放大问题", body: "结构复用于研究实验后，合理的完成报告仍不能替代我来不及逐次做的独立验证。" },
     { title: "为验收加入关口", body: "从实际证据、独立审查到人工判断，逐步形成接受智能体结果的规则。" },
   ] : [
-    { title: "One plan reaches its limits", body: "Interruptions weakened memory of constraints. History, current state, and uncertain future steps were mixed together." },
-    { title: "Split, then refine", body: "Separating records by update frequency helped handoff. Future plans still depended on past and current results, so responsibilities needed refinement." },
+    { title: "One plan reaches its limits", body: "Interruptions made the original plan and constraints easier to forget. History, current state, and uncertain future steps were mixed together." },
+    { title: "Split, then refine", body: "Separating records helped handoff. I then distinguished accepted results, the active task, unresolved blockers, and conditional next steps." },
     { title: "Research raises the stakes", body: "Reusing the structure for experiments made a gap clearer: plausible completion reports could outpace my independent checking." },
     { title: "Gate acceptance", body: "Checks of actual evidence, independent review, and human decisions became rules for accepting an agent's work." },
   ];
@@ -69,8 +69,8 @@ export default function HomePage({ locale }: { locale: Locale }) {
         <span className={styles.index}>0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p>
       </li>)}</ol>
       <div className={styles.storyLinks}>
-        <Link href={projectLink("governance", "approach")}>{zh ? "阅读转写器的开发演化案例" : "Read the transcriber development case"} <span aria-hidden="true">-&gt;</span></Link>
-        <Link href={projectLink("1pcloop", "practice")}>{zh ? "编程流程中的多语言开发任务" : "Multilingual transcriber development"} <span aria-hidden="true">-&gt;</span></Link>
+        <Link href={projectLink("governance", "approach")}>{zh ? "审查方法如何演化" : "How the review method evolved"} <span aria-hidden="true">-&gt;</span></Link>
+        <Link href={projectLink("1pcloop", "practice")}>{zh ? "编程流程的实际运行" : "The coding workflow in practice"} <span aria-hidden="true">-&gt;</span></Link>
       </div>
       <aside className={styles.releaseCase} aria-label={zh ? "工程实践案例" : "Engineering case"}>
         <p className="eyebrow">{zh ? "同一方法的发布实践 / AudioShifter" : "Release engineering with the method / AudioShifter"}</p>
