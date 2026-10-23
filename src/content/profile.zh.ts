@@ -11,7 +11,7 @@ export const profileZh: Profile = {
   education: [
     {
       institution: "亚利桑那州立大学",
-      degree: "计算机科学理学学士（软件工程方向）",
+      degree: "计算机科学理学学士",
       period: "2024 年 1 月入学，预计 2026 年 12 月毕业",
       gpa: "4.0/4.0",
       detail: "院长荣誉名单：2024 年春季、2024 年秋季、2025 年春季、2025 年秋季。",
