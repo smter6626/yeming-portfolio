@@ -21,7 +21,7 @@ export interface ProjectNarrativeSection {
   title: string;
   navLabel: string;
   paragraphs: string[];
-  points?: { title: string; body: string }[];
+  points?: { id?: string; title: string; body: string }[];
   steps?: { label: string; description: string }[];
 }
 

@@ -10,7 +10,7 @@ export default function ProjectNarrative({ sections }: { sections: readonly Proj
       </div>
       <div className={styles.narrativeCopy}>{section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
       {Boolean(section.points?.length) && <ul className={styles.narrativePoints}>{section.points?.map(point => (
-        <li key={point.title}><h3>{point.title}</h3><p>{point.body}</p></li>
+        <li key={point.title} id={point.id}><h3>{point.title}</h3><p>{point.body}</p></li>
       ))}</ul>}
       {Boolean(section.steps?.length) && <ol className={styles.architecture}>{section.steps?.map((step, stepIndex) => (
         <li key={step.label}>

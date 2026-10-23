@@ -99,55 +99,61 @@ export const projects: Project[] = [
     narrative: [
       {
         "id": "approach",
-        "title": "The goal stayed stable. The plan kept changing.",
-        "navLabel": "How it developed",
+        "title": "How transcriber development led to a review framework.",
+        "navLabel": "Development case",
         "paragraphs": [
-          "This method grew through repeated adjustments on long-running projects. I initially needed a way to recover my place across several projects, so one plan file held both completed work and future steps. Over time, it described the past more reliably than the future: execution kept encountering new obstacles while the overall direction and final goal often stayed the same."
+          "I initially used one plan file to track completed work and future steps in my Classroom Live Transcriber project. Development was frequently interrupted and resumed. My own memory of the full plan and its constraints weakened between sessions, while the implementation route kept changing.",
+          "The file mixed information with different roles: historical results to preserve, current state to update, and future steps that were still uncertain but looked like settled instructions. A single progress document was no longer enough to guide the next session."
+        ]
+      },
+      {
+        "id": "iterations",
+        "title": "A first split helped handoff, then exposed new problems.",
+        "navLabel": "Iteration & feedback",
+        "paragraphs": [
+          "I first separated information mainly by how often it changed. Relatively stable background, requirements, constraints, and environment went in one document; current state, step results, blockers, and future plans went in another. Those records plus the code made it possible for another LLM session to take over implementation or checking.",
+          "Handoff improved, but two issues remained. Future steps depended on what had actually completed and what was currently running. Meanwhile, agents repeatedly reported plausible conclusions and completed work that I did not have time to independently recheck."
         ],
-        "steps": [
+        "points": [
           {
-            "label": "Start with one project plan",
-            "description": "Past progress and future steps lived together so work could resume later. As the route changed, obsolete implementation plans became mixed with goals and constraints that still applied."
+            "title": "Refine responsibilities, not just update frequency",
+            "body": "I gradually reorganized the records so accepted results, the active task, unresolved blockers, and conditional future directions had distinct meanings. A future plan needed to be revisable when the evidence or current state changed."
           },
           {
-            "label": "Separate information by how it changes",
-            "description": "One record holds relatively stable background, constraints, the final goal, and environment. Another holds current state, small-step results, and blockers of different severity. Implementation can change course while keeping the same governing goal."
-          },
-          {
-            "label": "Use the records for handoff and review",
-            "description": "The two records and repository code gave a new LLM session a way to reconstruct the task and continue implementation or verification. In my Classroom Live Transcriber project, I then let AI take on more work and used other agents to cross-check it from the same records and code."
+            "id": "research-expansion",
+            "title": "Research experiments made acceptance more consequential",
+            "body": "I reused and refined the structure across other projects, including research experiments. At that point I needed a defensible basis for accepting outputs within my ability to check them. This made independent verification a central design problem."
           }
         ]
       },
       {
         "id": "contributions",
-        "title": "Make acceptance inspectable and accountable.",
-        "navLabel": "The method",
+        "title": "Put evidence and review between generation and acceptance.",
+        "navLabel": "Acceptance gates",
         "paragraphs": [
-          "Externalizing context made handoff possible, but raised another question: what should a new session rely on when accepting earlier work? The transcriber was a personal project where I could tolerate rework, so I deliberately explored how much AI could take over. A running app and the implementing agent's report still left me with questions about correctness.",
-          "I began separating implementation from acceptance, then made explicit what information stays stable, who can change it, and what evidence can revise the current conclusion."
+          "I developed the framework around that need: preserve transferable context, then make acceptance a separate decision. This progression is why my research interests now center on LLM agent reliability and trustworthy AI."
         ],
         "points": [
           {
-            "title": "Independent access, judgment, and evidence challenge",
-            "body": "A reviewer examines the actual artifacts, reaches its own acceptance decision, and judges whether the verification is sufficient. It can request another test or extraction path when the existing checks leave the claim unresolved."
+            "title": "Inspect what was actually produced",
+            "body": "Identify the code, experiment result, or other artifact and the checks behind it. A completion report helps locate evidence; it does not decide whether the result can be accepted."
           },
           {
-            "title": "Stable requirements and current state have different jobs",
-            "body": "Background, goals, and boundaries can remain valid while execution routes, step results, and blockers change with evidence. Keeping them separate gives new sessions a recorded basis for continuing work while preserving unresolved issues."
+            "title": "Give independent review its own judgment",
+            "body": "A separate agent directly inspects the artifacts and forms an acceptance decision. It must also judge whether the chosen checks are sufficient, and can request more evidence or a different verification path."
           },
           {
-            "title": "New evidence can overturn an earlier acceptance",
-            "body": "I preserve the earlier record and explicitly invalidate its conclusion. Later sessions can trace the history while continuing from the current decision. Human judgment remains part of decisions about intent, sensitive facts, and irreversible actions."
+            "title": "Keep human decisions and current state explicit",
+            "body": "When evidence is unresolved or a decision needs the owner, pause for human judgment. Record accepted results and invalidate conclusions overturned by new evidence so later sessions can continue from the current decision."
           }
         ]
       },
       {
         "id": "architecture",
-        "title": "How cross-checking changed acceptance.",
+        "title": "Where independent review changed a decision.",
         "navLabel": "Practical cases",
         "paragraphs": [
-          "Cross-checking let verification pass to another session. Later artifact reviews sharpened the design: a reviewer needs direct access to results, its own acceptance judgment, and a judgment about whether the chosen verification is sufficient."
+          "Later artifact and release reviews made the framework more precise. These cases show how checking the evidence can change acceptance and how the amount of review follows the task."
         ],
         "points": [
           {
@@ -156,7 +162,8 @@ export const projects: Project[] = [
           },
           {
             "title": "An audio-app release tied to its actual package",
-            "body": "For AudioShifter, I concentrated checks around package and release identity: tests, native dependencies, tagged source, checksums, a separate Mac, and downloaded release assets. The review structure followed the concentrated release risks."
+            "body": "For AudioShifter, I concentrated checks around package and release identity: tests, native dependencies, tagged source, checksums, a separate Mac, and downloaded release assets. The review structure followed the concentrated release risks.",
+            "id": "audioshifter-release"
           }
         ]
       }

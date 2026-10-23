@@ -11,26 +11,26 @@ export default function HomePage({ locale }: { locale: Locale }) {
   const profile = getProfile(locale);
   const education = profile.education[0];
   const zh = locale === "zh";
-  const projectLink = (id: string) => localePath(locale, `/work/${id}/`);
+  const projectLink = (id: string, fragment = "") => localePath(locale, `/work/${id}/${fragment ? `#${fragment}` : ""}`);
   const strengths = zh ? [
-    { title: "机器学习研究", body: "研究概率模型在分布变化下的稳健性，参与 PeTeR 合作研究与实验。", link: "阅读研究经历", id: "research" },
-    { title: "系统设计判断", body: "从目标稳定、执行路线多变的任务中，发展可交接、可独立审查的 LLM 工作方法。", link: "了解方法如何形成", id: "governance" },
-    { title: "工程实践", body: "把方法落实为可恢复的编程流程，并在桌面应用的开发、测试与发布中使用。", link: "查看编程系统", id: "1pcloop" },
+    { title: "机器学习研究", body: "概率模型稳健性与分布变化。", link: "阅读研究经历", id: "research" },
+    { title: "工作流设计", body: "LLM 协作、上下文交接与独立审查。", link: "了解方法如何形成", id: "governance" },
+    { title: "工程实践", body: "可恢复的执行、桌面工具与发布检查。", link: "查看编程系统", id: "1pcloop" },
   ] : [
-    { title: "Machine learning research", body: "Studying probabilistic-model robustness under distribution shift, with collaborative research and experiments for PeTeR.", link: "Explore the research", id: "research" },
-    { title: "System design judgment", body: "Turning changing project plans and stable goals into LLM workflows that another session can resume and review.", link: "How the method developed", id: "governance" },
-    { title: "Engineering practice", body: "Implementing a recoverable coding workflow and applying the method to desktop software development, testing, and release.", link: "Explore the coding system", id: "1pcloop" },
+    { title: "Machine learning research", body: "Probabilistic circuits and distribution shift.", link: "Explore the research", id: "research" },
+    { title: "Workflow design", body: "LLM collaboration, context handoff, and independent review.", link: "How the method developed", id: "governance" },
+    { title: "Engineering practice", body: "Recoverable execution, local tools, and release checks.", link: "Explore the coding system", id: "1pcloop" },
   ];
   const evolution = zh ? [
-    { title: "实际开发暴露问题", project: "课堂转写器", id: "transcriber", body: "单份计划能记录过去，却无法预写不断变化的实现路线；其他会话也需要找回当前任务。" },
-    { title: "按职责抽象方法", project: "独立审查与验收", id: "governance", body: "将稳定约束与实时状态分开，使新会话能接手，再把实现与验收交给不同角色。" },
-    { title: "把规则变为执行机制", project: "可恢复的 AI 编程流程", id: "1pcloop", body: "Python 调度编程与审查，核对提交和证据身份，在需要人决定时暂停。" },
-    { title: "回到实际任务检验", project: "转写器中的多语言开发", id: "transcriber", body: "流程经历实现、文档补充与最终确认，再由我检查日语和法语的真实音频转写。" },
+    { title: "单份计划的局限", body: "反复中断与恢复，让记忆和约束退化；历史、当前状态与不确定的未来步骤又混在一起。" },
+    { title: "拆分后继续改进", body: "按更新频率分开文档改善了接手，但未来计划仍依赖过去与当前，职责需要进一步明确。" },
+    { title: "研究任务放大问题", body: "结构复用于研究实验后，合理的完成报告仍不能替代我来不及逐次做的独立验证。" },
+    { title: "为验收加入关口", body: "从实际证据、独立审查到人工判断，逐步形成接受智能体结果的规则。" },
   ] : [
-    { title: "A real task exposes the problem", project: "Classroom Live Transcriber", id: "transcriber", body: "One plan recorded the past but could not predict a changing implementation route. New sessions also needed to recover the current task." },
-    { title: "Separate responsibilities", project: "Independent review & acceptance", id: "governance", body: "Separate stable requirements from current state for handoff, then give implementation and acceptance different roles." },
-    { title: "Make the method executable", project: "Recoverable AI coding workflow", id: "1pcloop", body: "Python routes coding and review, checks commit and evidence identity, and pauses for decisions that need a person." },
-    { title: "Apply it back to a real task", project: "Multilingual transcriber development", id: "transcriber", body: "The workflow handled implementation, a documentation follow-up, and final confirmation, followed by my checks with live Japanese and French audio." },
+    { title: "One plan reaches its limits", body: "Interruptions weakened memory of constraints. History, current state, and uncertain future steps were mixed together." },
+    { title: "Split, then refine", body: "Separating records by update frequency helped handoff. Future plans still depended on past and current results, so responsibilities needed refinement." },
+    { title: "Research raises the stakes", body: "Reusing the structure for experiments made a gap clearer: plausible completion reports could outpace my independent checking." },
+    { title: "Gate acceptance", body: "Checks of actual evidence, independent review, and human decisions became rules for accepting an agent's work." },
   ];
 
   return <main id="main" className="container">
@@ -38,7 +38,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
       <div>
         <p className="eyebrow">{zh ? "Yeming Dai / 计算机科学本科生" : "Yeming Dai / Computer science undergraduate"}</p>
         <h1 id="intro-title" className={styles.title}>{zh ? <>研究 AI 可靠性，<br /><em>构建可用的系统。</em></> : <>Researching reliability.<br /><em>Building useful systems.</em></>}</h1>
-        <p className={styles.description}>{zh ? "我研究概率模型的稳健性，设计 LLM 智能体的审查与协作流程，也开发本地软件。我关注如何从实际问题中形成方法，再通过实现与检查不断改进。" : "I study probabilistic-model robustness, design review and collaboration workflows for LLM agents, and build local software. My work develops from practical problems into methods that I implement, inspect, and refine."}</p>
+        <p className={styles.description}>{zh ? "我研究概率模型的稳健性，设计 LLM 智能体的审查与协作流程，并将方法用于软件与实验工作。" : "I study probabilistic-model robustness and design review workflows for LLM agents, applying the methods to software and experiment work."}</p>
         <div className={styles.academic}>
           <p className={styles.institution}>{education.institution}</p>
           <p>{education.degree} <span aria-hidden="true">/</span> GPA {education.gpa}</p>
@@ -63,20 +63,24 @@ export default function HomePage({ locale }: { locale: Locale }) {
     </section>
 
     <section className="section" id="evolution" aria-labelledby="evolution-title">
-      <div className="section-top"><div><p className="eyebrow">{zh ? "01 / 一条设计演化线" : "01 / From practice to a reusable method"}</p><h2 id="evolution-title">{zh ? "问题如何变成方法，再回到实践。" : "A problem becomes a method, then returns to practice."}</h2></div></div>
-      <p className={styles.storyLead}>{zh ? "课堂转写器开发中，目标保持稳定，执行路线却随新问题改变。这促使我拆分约束与状态；外置的上下文随后支持了跨会话接手与独立检查。" : "While building the transcriber, the goal stayed stable as the route changed with new obstacles. Separating requirements from current state made the work transferable, which then enabled independent review across sessions."}</p>
-      <ol className={styles.evolution}>{evolution.map((step, index) => <li key={`${step.id}-${index}`}>
-        <span className={styles.index}>0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p><Link href={projectLink(step.id)}>{step.project} <span aria-hidden="true">-&gt;</span></Link>
+      <div className="section-top"><div><p className="eyebrow">{zh ? "01 / 一条设计演化线" : "01 / From practice to a reusable method"}</p><h2 id="evolution-title">{zh ? "开发中的问题，如何推动方法演化。" : "How development problems shaped the method."}</h2></div></div>
+      <p className={styles.storyLead}>{zh ? "从课堂转写器到研究实验，每次改进都解决一部分问题，也暴露下一层需要检查的东西。" : "From transcriber development to research experiments, each change addressed a problem and exposed another layer that needed checking."}</p>
+      <ol className={styles.evolution}>{evolution.map((step, index) => <li key={step.title}>
+        <span className={styles.index}>0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p>
       </li>)}</ol>
+      <div className={styles.storyLinks}>
+        <Link href={projectLink("governance", "approach")}>{zh ? "阅读转写器的开发演化案例" : "Read the transcriber development case"} <span aria-hidden="true">-&gt;</span></Link>
+        <Link href={projectLink("1pcloop", "practice")}>{zh ? "编程流程中的多语言开发任务" : "Multilingual transcriber development"} <span aria-hidden="true">-&gt;</span></Link>
+      </div>
       <aside className={styles.releaseCase} aria-label={zh ? "工程实践案例" : "Engineering case"}>
         <p className="eyebrow">{zh ? "同一方法的发布实践 / AudioShifter" : "Release engineering with the method / AudioShifter"}</p>
-        <p>{zh ? "AudioShifter 的发布把这套方法用在一个更集中的工程问题上：让测试、应用包、源码版本和公开下载文件对应起来。它展示了如何根据任务风险选择需要的检查与人工决定。" : "AudioShifter applied the method to a focused engineering problem: connecting tests, the app package, tagged source, and downloadable release files. The case shows how review and human decisions can follow a task's specific risks."}</p>
-        <Link href={projectLink("audioshifter")}>{zh ? "查看发布工程案例" : "Explore the release case"} <span aria-hidden="true">-&gt;</span></Link>
+        <p>{zh ? "用测试、应用包审计、版本源码与下载核对，把发布决定对应到实际文件。" : "Tests, package audits, tagged source, and download checks connected the release decision to the actual files."}</p>
+        <Link href={projectLink("governance", "audioshifter-release")}>{zh ? "查看发布工程案例" : "Explore the release case"} <span aria-hidden="true">-&gt;</span></Link>
       </aside>
     </section>
 
     <section className="section" id="work" aria-labelledby="work-title">
-      <div className="section-top"><div><p className="eyebrow">{zh ? "02 / 代表作品" : "02 / Selected work"}</p><h2 id="work-title">{zh ? "科研、系统与软件。" : "Research, systems, and software."}</h2></div><p className="section-description">{zh ? "概率模型研究提供学术背景；方法、编程流程与转写器形成实践演化线；AudioShifter 展示发布工程中的应用。" : "Probabilistic-model research anchors my academic work. The method, coding workflow, and transcriber form a development story; AudioShifter adds a release-engineering case."}</p></div>
+      <div className="section-top"><div><p className="eyebrow">{zh ? "02 / 代表作品" : "02 / Selected work"}</p><h2 id="work-title">{zh ? "科研、系统与软件。" : "Research, systems, and software."}</h2></div></div>
       <WorkIndex projects={projects} locale={locale} />
       <details className={styles.optionalMap}>
         <summary>{zh ? "也可以通过作品地图浏览" : "Explore through the project map"}</summary>
@@ -85,10 +89,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
     </section>
 
     <section className="section" id="about" aria-labelledby="about-title">
-      <div className="section-top"><div><p className="eyebrow">{zh ? "03 / 关于我" : "03 / About me"}</p><h2 id="about-title">{zh ? "研究兴趣与工作方式。" : "Research interests and how I work."}</h2></div></div>
+      <div className="section-top"><div><p className="eyebrow">{zh ? "03 / 关于我" : "03 / About me"}</p><h2 id="about-title">{zh ? "研究兴趣与联系。" : "Research interests & contact."}</h2></div></div>
       <div className="about-grid"><div>
         <p className="about-copy">{profile.introduction}</p>
-        <div className="education">{profile.education.map(item => <article key={item.institution}><h3>{item.institution}</h3><p>{item.degree}{item.gpa ? ` / GPA ${item.gpa}` : ""}</p><small>{item.period}{item.detail ? ` / ${item.detail}` : ""}</small></article>)}</div>
+        <p className={styles.location}>{profile.location}</p>
         <div className="hero-actions"><a href={`mailto:${profile.email}`} className="text-link">{zh ? "联系我" : "Get in touch"} <span aria-hidden="true">-&gt;</span></a><a className="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a></div>
       </div><div>{profile.skills.map(group => <article className="skill-group" key={group.label}><h3>{group.label}</h3><p>{group.items.join(" / ")}</p></article>)}</div></div>
     </section>
