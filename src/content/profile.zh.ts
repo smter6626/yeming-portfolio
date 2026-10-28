@@ -14,7 +14,7 @@ export const profileZh: Profile = {
       degree: "计算机科学理学学士",
       period: "2024 年 1 月入学，预计 2026 年 12 月毕业",
       gpa: "4.0/4.0",
-      detail: "院长荣誉名单：2024 年春季、2024 年秋季、2025 年春季、2025 年秋季。",
+      detail: "院长荣誉名单：2024 年春季、2024 年秋季、2025 年春季、2025 年秋季、2026 年春季。",
     },
   ],
   skills: profile.skills.map((skill, index) => ({

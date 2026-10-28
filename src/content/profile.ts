@@ -16,7 +16,7 @@ export const profile: Profile = {
       degree: "B.S. in Computer Science",
       period: "Jan 2024 - expected Dec 2026",
       gpa: "4.0/4.0",
-      detail: "Dean's List: Spring 2024, Fall 2024, Spring 2025, Fall 2025.",
+      detail: "Dean's List: Spring 2024, Fall 2024, Spring 2025, Fall 2025, Spring 2026.",
     },
   ],
   skills: [
